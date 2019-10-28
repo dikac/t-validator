@@ -1,2 +1,2 @@
 # t-validator
-Typescript Validator
+typescript validator
