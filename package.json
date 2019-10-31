@@ -1,9 +1,9 @@
 {
   "name": "t-validator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Typescript validator",
   "dependencies": {
-    "@types/node": "^12.11.7",
+    "@types/node": "^12.12.3",
     "file-copy-no-overwrite": "git+https://github.com/dikac/file-copy-no-overwrite.git",
     "npm-run-all": "^4.1.5",
     "t-validatable": "git+https://github.com/dikac/t-validatable.git",
