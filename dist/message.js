@@ -10,12 +10,11 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Message {
-        constructor(validator, result) {
-            this.validator = validator;
+        constructor(result) {
             this.result = result;
         }
         validate(value) {
-            return this.result(value, this.validator(value));
+            return this.result(value);
         }
     }
     exports.default = Message;

@@ -1,17 +1,22 @@
 import Validator from "./validator";
 import Validatable from "t-validatable/validatable";
+import Immutable from "t-value/immutable";
+import MessageInterface from "t-message/message";
 
-export default class Message<Value, Result extends Validatable = Validatable> implements Validator<Value, Result> {
+export default class Message<
+    Value,
+    Result extends Validatable &  MessageInterface &  Immutable<Value> = Validatable &  MessageInterface &  Immutable<Value>
+    > implements Validator<Value, Result>
+{
 
     constructor(
-        public validator : (value : Value) => boolean,
-        public result : (value : Value, boolean : boolean) => Result,
+        public result : (value : Value) => Result,
     ) {
 
     }
 
     validate(value: Value): Result {
 
-        return this.result(value, this.validator(value));
+        return this.result(value);
     }
 }
