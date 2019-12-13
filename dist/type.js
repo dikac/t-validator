@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class Message {
+    class Type {
         constructor(result) {
             this.result = result;
         }
@@ -17,6 +17,6 @@
             return this.result(value);
         }
     }
-    exports.default = Message;
+    exports.default = Type;
 });
-//# sourceMappingURL=message.js.map
+//# sourceMappingURL=type.js.map

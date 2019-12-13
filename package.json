@@ -1,6 +1,6 @@
 {
   "name": "t-validator",
-  "version": "0.4.5",
+  "version": "0.5.6",
   "description": "Typescript validator",
   "dependencies": {
     "@types/node": "^12.12.11",

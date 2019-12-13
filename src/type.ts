@@ -3,19 +3,20 @@ import Validatable from "t-validatable/validatable";
 import Immutable from "t-value/immutable";
 import MessageInterface from "t-message/message";
 
-export default class Message<
+export default class Type<
+    Subject,
     Value,
     Result extends Validatable &  MessageInterface &  Immutable<Value> = Validatable &  MessageInterface &  Immutable<Value>
-    > implements Validator<Value, Result>
+    > implements Validator<Subject, Result>
 {
 
     constructor(
-        public result : (value : Value) => Result,
+        private result : (value : any) => Result,
     ) {
 
     }
 
-    validate(value: Value): Result {
+    validate(value: Subject): Result {
 
         return this.result(value);
     }
