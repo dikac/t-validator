@@ -1,0 +1,1 @@
+{"version":3,"file":"message.js","sourceRoot":"","sources":["../src/message.ts"],"names":[],"mappings":";;;;;;;;;;;IAGA,MAAqB,OAAO;QAExB,YACW,SAAsC,EACtC,MAAqD;YADrD,cAAS,GAAT,SAAS,CAA6B;YACtC,WAAM,GAAN,MAAM,CAA+C;QAGhE,CAAC;QAED,QAAQ,CAAC,KAAY;YAEjB,OAAO,IAAI,CAAC,MAAM,CAAC,KAAK,EAAE,IAAI,CAAC,SAAS,CAAC,KAAK,CAAC,CAAC,CAAC;QACrD,CAAC;KACJ;IAbD,0BAaC"}
