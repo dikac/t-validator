@@ -1,4 +1,4 @@
-import ValidatableType from "../dist/validatable/type";
+import ValidatableType from "t-validatable/message/type";
 
 
 export default class StringType extends ValidatableType<string> {

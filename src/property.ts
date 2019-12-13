@@ -2,9 +2,7 @@ import Validator from "./validator";
 import Validatable from "t-validatable/validatable";
 import MessageInterface from "t-message/message";
 import Immutable from "t-value/immutable";
-import Type from "./type";
-import ValidatableType from "./validatable/type";
-import Map_ from "./validatable/map";
+import Map_ from "t-validatable/message/map";
 
 export default class Property<
     Value extends  {[key:string] : any},

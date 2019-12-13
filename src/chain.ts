@@ -1,6 +1,6 @@
 import Validator from "./validator";
 import Validatable from "t-validatable/validatable";
-import Array_ from "./validatable/array";
+import Array_ from "t-validatable/message/array";
 import MessageInterface from "t-message/message";
 import Immutable from "t-value/immutable";
 

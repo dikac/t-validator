@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./validatable/map"], factory);
+        define(["require", "exports", "t-validatable/message/map"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const map_1 = require("./validatable/map");
+    const map_1 = require("t-validatable/message/map");
     class Property {
         constructor(schema) {
             this.schema = schema;

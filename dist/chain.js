@@ -4,12 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./validatable/array"], factory);
+        define(["require", "exports", "t-validatable/message/array"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const array_1 = require("./validatable/array");
+    const array_1 = require("t-validatable/message/array");
     class Chain {
         constructor(validators) {
             this.validators = validators;
