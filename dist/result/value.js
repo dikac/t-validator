@@ -18,4 +18,4 @@
     }
     exports.default = Type;
 });
-//# sourceMappingURL=value..js.map
+//# sourceMappingURL=value.js.map
