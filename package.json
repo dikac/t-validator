@@ -1,12 +1,12 @@
 {
-  "name": "t-validator",
+  "name": "@dikac/t-validator",
   "version": "0.1.3",
   "description": "Typescript validator",
   "dependencies": {
+    "@dikac/t-validatable": "^0.6.5",
     "@types/node": "^12.12.11",
-    "dist-mover": "git+https://github.com/dikac/dist-mover.git",
+    "dist-mover": "0.0.9",
     "npm-run-all": "^4.1.5",
-    "t-validatable": "git+https://github.com/dikac/t-validatable.git",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
@@ -27,7 +27,6 @@
   },
   "files": [
     "tsconfig.json",
-    "src/",
     "dist/",
     "LICENSE",
     "Readme.md"
