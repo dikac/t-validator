@@ -1,15 +1,16 @@
 {
-  "name": "t-validator",
+  "name": "@dikac/t-validator",
   "version": "0.7.9",
   "description": "Typescript validator",
   "dependencies": {
-    "@types/node": "^12.12.11",
-    "dist-mover": "git+https://github.com/dikac/dist-mover.git",
+    "@dikac/deployer": "^0.1.2",
+    "@dikac/t-validatable": "^0.6.7",
+    "@types/node": "^12.12.24",
     "npm-run-all": "^4.1.5",
+    "typescript": "^3.7.4"
     "t-message": "git+https://github.com/dikac/t-message.git",
     "t-validatable": "git+https://github.com/dikac/t-validatable.git",
     "t-value": "git+https://github.com/dikac/t-value.git",
-    "typescript": "^3.7.2"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.0",
@@ -24,11 +25,10 @@
     "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "postinstall": "npm run production",
-    "production": "dist-mover"
+    "postinstall": "npm-run-all deploy",
+    "deploy": "deployer /.git /dist /"
   },
   "files": [
-    "tsconfig.json",
     "dist/",
     "LICENSE",
     "Readme.md"
