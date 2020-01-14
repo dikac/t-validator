@@ -4,22 +4,23 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "t-validatable/message/map"], factory);
+        define(["require", "exports", "./validatable/property"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const map_1 = require("t-validatable/message/map");
+    const property_1 = require("./validatable/property");
     class Property {
         constructor(schema) {
             this.schema = schema;
         }
         validate(value) {
-            let map = new Map();
+            //let map : {[Key in keyof Value] : Validatable & Immutable<Value[Key]> & MessageInterface<Msg>} = {};
+            let map = {};
             for (let property in value) {
-                map.set(property, this.schema[property].validate(value[property]));
+                map[property] = this.schema[property].validate(value[property]);
             }
-            return new map_1.default(value, map);
+            return new property_1.default(map);
             //
             // return {
             //     value : 1,

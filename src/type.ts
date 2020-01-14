@@ -1,7 +1,7 @@
 import Validator from "./validator";
-import Validatable from "t-validatable/validatable";
-import Immutable from "t-value/immutable";
-import MessageInterface from "t-message/message";
+import Validatable from "@dikac/t-validatable/validatable";
+import Immutable from "@dikac/t-value/immutable";
+import MessageInterface from "@dikac/t-message/message";
 
 export default class Type<
     Value,

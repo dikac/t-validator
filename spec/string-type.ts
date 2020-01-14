@@ -1,4 +1,4 @@
-import ValidatableType from "t-validatable/message/type";
+import ValidatableType from "@dikac/t-validatable/message/type";
 
 
 export default class StringType extends ValidatableType<string> {

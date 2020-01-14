@@ -1,8 +1,8 @@
 import Validator from "./validator";
-import Validatable from "t-validatable/validatable";
-import Array_ from "t-validatable/message/array";
-import MessageInterface from "t-message/message";
-import Immutable from "t-value/immutable";
+import Validatable from "@dikac/t-validatable/validatable";
+import Array_ from "@dikac/t-validatable/message/array";
+import MessageInterface from "@dikac/t-message/message";
+import Immutable from "@dikac/t-value/immutable";
 
 type Result<Value> = Validatable &  MessageInterface<string[]> & Immutable<Value>;
 
