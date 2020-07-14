@@ -1,8 +1,7 @@
 import Validator from "../../../dist/validator";
 import Validatable from "@dikac/t-validatable/validatable";
-import Primitive from "@dikac/t-validatable/primitive";
-import CallValidator from "../../../dist/object/record/validate";
-import Asserted from "@dikac/t-validatable/assert/valid";
+import CallValidator from "../../../dist/record/recursive/validate";
+import Asserted from "@dikac/t-validatable/message/asserted";
 import Value from "@dikac/t-value/value";
 import Mixin from "@dikac/t-validatable/message/readonly-merge";
 import Message from "@dikac/t-message/message";
@@ -15,7 +14,7 @@ class Str implements Validator<string, Validatable> {
 
     validate(value: string): Validatable {
 
-        return new Primitive(typeof value === "string");
+        return {valid: typeof value === "string"};
     }
 }
 
@@ -23,7 +22,7 @@ class StrAny implements Validator<any, Validatable> {
 
     validate(value: any): Validatable {
 
-        return new Primitive(typeof value === "string");
+        return {valid: typeof value === "string"};
     }
 }
 
@@ -31,7 +30,7 @@ class Num implements Validator<number, Validatable> {
 
     validate(value: number): Validatable {
 
-        return new Primitive(typeof value === "number");
+        return {valid: typeof value === "number"};
     }
 }
 
@@ -39,7 +38,7 @@ class NumAny implements Validator<any, Validatable> {
 
     validate(value: any): Validatable {
 
-        return new Primitive(typeof value === "number");
+        return {valid: typeof value === "number"};
     }
 }
 
@@ -49,13 +48,13 @@ class ExtendedStr extends Str implements Validator<string, Validatable & Message
 
     validate(value: string): Validatable & Message<string> & Value<string> {
 
-        return new Asserted<Validatable & Message<string> & Value<string>>(
-            new Mixin(
+
+            return <Validatable & Message<string> & Value<string>> new Mixin(
                 {value:value},
-                {message:'ExtendedNumAny'},
+                {message:'ExtendedStr'},
                 super.validate(value),
-            )
-        );
+            );
+
     }
 }
 
@@ -66,7 +65,7 @@ class ExtendedStrAny extends StrAny implements Validator<any, Validatable & Mess
         return new Asserted<Validatable & Message<string> & Value<string>>(
             new Mixin(
                 {value:value},
-                {message:'ExtendedNumAny'},
+                {message:'ExtendedStrAny'},
                 super.validate(value),
             )
         );
@@ -80,7 +79,7 @@ class ExtendedNum extends Num implements Validator<number, Validatable & Message
         return new Asserted<Validatable & Message<string> & Value<number>>(
             new Mixin(
                 {value:value},
-                {message:'ExtendedNumAny'},
+                {message:'ExtendedNum'},
                 super.validate(value),
             )
         );
@@ -92,7 +91,7 @@ class ExtendedNumAny extends NumAny implements Validator<any, Validatable & Mess
     validate(value: any): Validatable & Message<string> & Value<number> {
 
         return new Asserted<Validatable & Message<string> & Value<number>>(
-            new Mixin(
+             new Mixin(
                 {value:value},
                 {message:'ExtendedNumAny'},
                 super.validate(value),
@@ -189,6 +188,7 @@ describe("extended validatable", function() {
     };
 
     let result = CallValidator(validator, value);
+
     it('match validator1', ()=> expect(result.validator1.valid).toBe(true));
     it('match validator1', ()=> expect(result.validator1.message).toBe('ExtendedNum'));
     it('match validator1', ()=> expect(result.validator1.value).toBe(10));
@@ -241,7 +241,7 @@ describe("extended validatable", function() {
         } catch (e) {
 
             expect(e).toBeInstanceOf(Error);
-            expect(e.message).toBe('ExtendedNumAny');
+            expect(e.message).toBe('ExtendedStrAny');
         }
 
        // expect(result.validator6.validator9.validator11.value).toBe(10)

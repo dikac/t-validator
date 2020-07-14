@@ -1,50 +1,35 @@
-// import Validator from "./validator";
-// import Validatable from "@dikac/t-validatable/validatable";
-// import RecordObject from "@dikac/t-object/record/recursive/record";
-// import RecordMap from "@dikac/t-object/record/recursive/map";
-// import ToValue from "./object/to-value";
-// import ToValidatable from "./object/to-validatable";
-// import Validate from "./object/record/validate";
-// import RecordValid from "@dikac/t-validatable/record/recursive/valid";
-// import Mixin from "@dikac/t-object/merge";
-// import Argument from "./infer/argument";
-// import Return from "./infer/return";
-// import Value from "@dikac/t-object/record/infer/value";
-//
-//
-// export default class Record<
-//     Container extends RecordObject<PropertyKey, Validator<any>>
-//     > implements Validator<
-//     RecordMap<Argument<Container>, Container>,
-//     RecordMap<Return<Container>, Container> & Validatable
-//     >
-// {
-//
-//     constructor(
-//         public validators : Container
-//     ) {
-//
-//         this.guardProperty(validators);
-//     }
-//
-//     protected guardProperty(object : object) {
-//
-//         if('valid' in object) {
-//
-//             throw new Error(`property "valid" is reserved`);
-//         }
-//     }
-//
-//     validate(value: RecordMap<Argument<Container>, Container>) : RecordMap<Return<Container>, Container> & Validatable {
-//
-//         let results = Validate(this.validators, value);
-//
-//         let validatable = {valid : RecordValid(results)};
-//
-//         return <RecordMap<Return<Container>, Container> & Validatable>Mixin(results, validatable);
-//     }
-// }
-//
-//
-//
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./record/recursive/validate", "@dikac/t-validatable/record/recursive/boolean/and"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const validate_1 = require("./record/recursive/validate");
+    const and_1 = require("@dikac/t-validatable/record/recursive/boolean/and");
+    class Record {
+        constructor(validators) {
+            this.validators = validators;
+            this.guardProperty(validators);
+        }
+        guardProperty(object) {
+            if ('valid' in object) {
+                throw new Error(`property "valid" is reserved`);
+            }
+        }
+        validate(value) {
+            let results = validate_1.default(this.validators, value);
+            return {
+                value: results,
+                // @ts-ignore
+                valid: and_1.default(results)
+            };
+        }
+    }
+    exports.default = Record;
+});
 //# sourceMappingURL=record.js.map

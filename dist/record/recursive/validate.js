@@ -4,28 +4,29 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-object/boolean/type", "@dikac/t-object/message/string/property-actual"], factory);
+        define(["require", "exports", "../../boolean/validator", "@dikac/t-object/boolean/object"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const type_1 = require("@dikac/t-object/boolean/type");
-    const property_actual_1 = require("@dikac/t-object/message/string/property-actual");
+    const validator_1 = require("../../boolean/validator");
+    const object_1 = require("@dikac/t-object/boolean/object");
     function validate(validators, values) {
         let object = {};
         for (let property in validators) {
             const validator = validators[property];
             const value = values[property];
-            if (Validator(validator)) {
+            if (validator_1.default(validator)) {
+                // @ts-ignore
                 object[property] = validator.validate(value);
                 continue;
             }
-            if (type_1.default(validator) && type_1.default(value)) {
+            if (object_1.default(validator) && object_1.default(value)) {
                 // @ts-ignore
                 object[property] = validate(validator, value);
                 continue;
             }
-            throw new Error(property_actual_1.default(property, 'validator or record of validator', validator + ''));
+            throw new Error(/*PropertyActual(property, */ 'validator or record of validator' /*, validator + '')*/);
         }
         return object;
     }

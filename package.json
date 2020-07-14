@@ -1,23 +1,24 @@
 {
   "name": "@dikac/t-validator",
-  "version": "0.7.10",
+  "version": "0.8.0",
   "description": "Typescript validator",
   "dependencies": {
-    "@dikac/t-function": "^0.4.1",
-    "@dikac/t-message": "^0.5.3",
-    "@dikac/t-object": "^0.17.3",
-    "@dikac/t-validatable": "^0.12.0",
-    "@dikac/t-value": "^0.8.1",
-    "@dikac/deployer": "^0.1.5"
+    "@dikac/deployer": "^0.1.5",
+    "@dikac/t-function": "^0.5.1",
+    "@dikac/t-message": "^0.5.5",
+    "@dikac/t-object": "^0.18.2",
+    "@dikac/t-validatable": "^0.14.2",
+    "@dikac/t-value": "^0.8.4"
   },
   "devDependencies": {
     "typescript": "^3.9.6",
     "npm-run-all": "^4.1.5",
+    "jasmine-ts-console-reporter": "^3.1.1",
     "@types/jasmine": "^3.5.11",
     "jasmine": "^3.4.0"
   },
   "scripts": {
-    "spec-run": "jasmine --config=./jasmine.json",
+    "spec-run": "jasmine --reporter=jasmine-ts-console-reporter --config=./jasmine.json",
     "spec": "npm-run-all spec-compile spec-run",
     "spec-compile": "npm-run-all --parallel spec-compile-script ",
     "spec-compile-watch": "npm-run-all --parallel spec-compile-watch-script",
