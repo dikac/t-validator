@@ -18,7 +18,8 @@
     "rimraf": "^3.0.2",
     "jasmine-ts-console-reporter": "^3.1.1",
     "@types/jasmine": "^3.5.11",
-    "jasmine": "^3.4.0"
+    "jasmine": "^3.4.0",
+    "json-properties-remover": "^0.1.2"
   },
   "scripts": {
     "spec-run": "jasmine --reporter=jasmine-ts-console-reporter --config=./jasmine.json",
