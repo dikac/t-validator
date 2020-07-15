@@ -5,7 +5,7 @@ import RecursiveInferReturn from "./infer/return";
 import Validator from "../../validator";
 import TypeObject from "@dikac/t-object/boolean/object";
 
-export default function validate<
+export default function Validate<
     Validators extends Record<PropertyKey, Validator<unknown>>
 >(
     validators : Validators,
@@ -29,11 +29,11 @@ export default function validate<
         if(TypeObject(validator) && TypeObject(value)) {
 
             // @ts-ignore
-            object[property] = validate(validator,  value);
+            object[property] = Validate(validator,  value);
             continue;
         }
 
-        throw new Error(/*PropertyActual(property, */'validator or record of validator'/*, validator + '')*/);
+        throw new Error(`property ${property} is not validator or record of validator`);
     }
 
     return  object;

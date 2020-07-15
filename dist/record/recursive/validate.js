@@ -11,7 +11,7 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     const validator_1 = require("../../boolean/validator");
     const object_1 = require("@dikac/t-object/boolean/object");
-    function validate(validators, values) {
+    function Validate(validators, values) {
         let object = {};
         for (let property in validators) {
             const validator = validators[property];
@@ -23,13 +23,13 @@
             }
             if (object_1.default(validator) && object_1.default(value)) {
                 // @ts-ignore
-                object[property] = validate(validator, value);
+                object[property] = Validate(validator, value);
                 continue;
             }
-            throw new Error(/*PropertyActual(property, */ 'validator or record of validator' /*, validator + '')*/);
+            throw new Error(`property ${property} is not validator or record of validator`);
         }
         return object;
     }
-    exports.default = validate;
+    exports.default = Validate;
 });
 //# sourceMappingURL=validate.js.map
