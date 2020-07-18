@@ -1,6 +1,7 @@
 import Validator from "./validator";
 import Functions from "@dikac/t-function/function";
 import Validatable from "@dikac/t-validatable/validatable";
+import FunctionSingle from "@dikac/t-function/function-single";
 
 export default class Callback<
     Value,
@@ -9,7 +10,7 @@ export default class Callback<
 {
 
     constructor(
-        private functions : Functions<[Value], Result>,
+        private functions : FunctionSingle<Value, Result>,
     ) {
 
     }

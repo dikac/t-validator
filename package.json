@@ -1,6 +1,6 @@
 {
   "name": "@dikac/t-validator",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Typescript validator",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",

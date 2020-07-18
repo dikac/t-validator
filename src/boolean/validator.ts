@@ -3,7 +3,7 @@ import TypeObject from "@dikac/t-object/boolean/object";
 import TypeFunction from "@dikac/t-function/boolean/function";
 
 export default function Validator<
-    Assumption extends Validator<any>
+    Assumption extends Validator
 >(
     value : any
 ) : value is Assumption {
