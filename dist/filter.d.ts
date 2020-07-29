@@ -1,6 +1,6 @@
 import Validator from "./validator";
 import Parameter from "./parameter/parameter";
-import ValidatorValidatable from "./validatable/validatable";
+import ValidatorValidatable from "./return/return";
 import Fn from "@dikac/t-function/function";
 import Validatable from "@dikac/t-validatable/validatable";
 import Message from "@dikac/t-message/message";

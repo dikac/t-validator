@@ -1,10 +1,11 @@
 import Callback from "../dist/callback";
-import Factory from "./validatable/factory";
+import ValidatableType from "@dikac/t-type/validatable/type-standard";
+import TypeString from "@dikac/t-type/validatable/string/type";
 import Wrapper from "../dist/wrapper";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Wrapper(new Callback((value)=>new Factory(value,'string')));
+let callback = new Wrapper(new Callback((value)=>ValidatableType(value,'string')));
 
 it('valid', function () {
 

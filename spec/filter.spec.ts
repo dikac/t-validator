@@ -1,11 +1,11 @@
 import Callback from "../dist/callback";
-import Factory from "./validatable/factory";
+import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Filter from "../dist/filter";
 import Validatable from "@dikac/t-validatable/validatable";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback((value)=>new Factory(value,'string'));
+let callback = new Callback((value)=>ValidatableType(value, 'string'));
 
 let filter = new Filter(callback, function (validatable : {value:unknown} & Validatable) : {value:unknown} & Validatable & {message:string} {
 
