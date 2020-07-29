@@ -3,11 +3,12 @@ import Parameter from "./parameter/parameter";
 import ValidatorValidatable from "./validatable/validatable";
 import Fn from "@dikac/t-function/function";
 import Validatable from "@dikac/t-validatable/validatable";
+import Message from "@dikac/t-message/message";
 
 
 export default class Filter<
     Container extends Validator,
-    Filtered extends Validatable
+    Filtered extends Validatable & Message
 > implements Validator<Parameter<Container>, Filtered> {
 
     constructor(
@@ -20,7 +21,7 @@ export default class Filter<
     validate(value : Parameter<Container>) : Filtered {
 
         let validatable : ValidatorValidatable<Container> = <ValidatorValidatable<Container>> this.subject.validate(value);
-        
+
         return this.filter(validatable, value);
     }
 }
