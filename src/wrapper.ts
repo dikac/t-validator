@@ -1,13 +1,15 @@
 import Validator from "./validator";
-import Parameter from "./parameter/parameter";
-import Return from "./return/return";
+import Base from "./parameter/base/base";
+import Type from "./parameter/type/type";
+import Extend from "./parameter/extend/extend";
+import Construct from "./return/construct";
 
 /**
  * wrapper for {@link Validator}
  */
 export default class Wrapper<
     Container extends Validator
-> implements Validator<Parameter<Container>, Return<Container>> {
+> implements Validator<Base<Container>, Type<Container>, Extend<Container>> {
 
     constructor(
         public subject : Container
@@ -15,9 +17,9 @@ export default class Wrapper<
 
     }
 
-    validate(value : Parameter<Container>) : Return<Container> {
+    validate<Argument extends Base<Container>>(value : Argument) : Construct<Base<Container>, Argument, Type<Container>, Extend<Container>> {
 
-        return <Return<Container>> this.subject.validate(value);
+        return <Construct<Base<Container>, Argument, Type<Container>, Extend<Container>>> this.subject.validate(value);
     }
 }
 

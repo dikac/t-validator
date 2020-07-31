@@ -1,5 +1,5 @@
-import Validatable from '@dikac/t-validatable/validatable';
 import Message from "@dikac/t-message/message";
-export default interface Validator<Value = unknown, Result extends Validatable & Message = Validatable & Message> {
-    validate(value: Value): Result;
+import Construct from "./return/construct";
+export default interface Validator<Base = unknown, Type extends Base = Base, Extend extends Message = Message> {
+    validate<Argument extends Base>(value: Argument): Construct<Base, Argument, Type, Extend>;
 }

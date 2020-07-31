@@ -1,19 +1,14 @@
 import Validator from "../validator";
-import TypeObject from "@dikac/t-object/boolean/object";
 import TypeFunction from "@dikac/t-function/boolean/function";
 
 export default function Validator<
     Assumption extends Validator
 >(
-    value : any
+    value : object
 ) : value is Assumption {
 
-    if(!TypeObject<Assumption>(value)) {
 
-        return false;
-    }
-
-    if(!TypeFunction(value.validate)) {
+    if(!TypeFunction((<Validator>value).validate)) {
 
         return false;
     }

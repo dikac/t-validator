@@ -1,10 +1,41 @@
 import Callback from "../dist/callback";
-import Type from "@dikac/t-type/validatable/type";
-import TypeString from "@dikac/t-type/validatable/string/type";
+import Construct from "../dist/return/construct";
+import Message from "@dikac/t-message/message";
+import ValidatableType from "@dikac/t-type/validatable/type-standard";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback((value)=>new Type(value,'string', TypeString));
+let callback = new Callback((value)=><Construct<any, any, string, Message<string>>>ValidatableType(value, 'string'));
+
+
+describe('compiler compatibility', ()=>{
+
+    let validatable = callback.validate(1);
+
+    if(validatable.valid) {
+
+        let boolean : boolean = validatable.valid;
+        let value : string = validatable.value;
+        let message : string = validatable.message;
+
+    } else {
+
+        let boolean : boolean = validatable.valid;
+        // @ts-expect-error
+        let value : string = validatable.value;
+        let number : number = validatable.value;
+        let message : string = validatable.message;
+    }
+
+
+    {
+        // @ts-expect-error
+        let valid : string = validatable.valid;
+        let value : any = validatable.value;
+        // @ts-expect-error
+        let message : number = validatable.message;
+    }
+});
 
 it('valid', function () {
 

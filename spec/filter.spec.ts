@@ -1,29 +1,61 @@
 import Callback from "../dist/callback";
 import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Filter from "../dist/filter";
-import Validatable from "@dikac/t-validatable/validatable";
+import Construct from "../dist/return/construct";
+import Message from "@dikac/t-message/message";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback((value)=>ValidatableType(value, 'string'));
+let callback = new Callback(
+    (value)=><Construct<any, any, string, Message<string>>>ValidatableType(value, 'string')
+);
 
-let filter = new Filter(callback, function (validatable : {value:unknown} & Validatable) : {value:unknown} & Validatable & {message:string} {
 
+let filter = new Filter<any, { data : string }, Message<string>>(callback, function (validatable : Construct<any, any, string, Message<string>>) : Construct<any, any, { data : string }, Message<string>> {
 
-    return {
-        valid : validatable.valid,
-        value : validatable.value,
-        message : 'message'
-    };
-})
+    if(validatable.valid) {
 
-describe('compiler compatible', ()=>{
+        return {
+            valid : validatable.valid,
+            value : {data : validatable.value},
+            message : 'message'
+        };
 
-    let validatable = filter.validate('str');
+    } else {
 
-    let boolean : boolean = validatable.valid;
-    let value : any = validatable.value;
-    let message : string = validatable.message;
+        return {
+            valid : validatable.valid,
+            value : validatable.value,
+            message : 'message'
+        };
+    }
+
+});
+
+let valid = filter.validate('str');
+if(valid.valid) {
+
+    valid.value.data;
+}
+
+describe('compiler compatibility', ()=>{
+
+    let validatable = filter.validate(1);
+
+    if(validatable.valid) {
+
+        let boolean : boolean = validatable.valid;
+        let value : { data : string } = validatable.value;
+        let message : string = validatable.message;
+
+    } else {
+
+        let boolean : boolean = validatable.valid;
+        // @ts-expect-error
+        let value : string = validatable.value;
+        let number : number = validatable.value;
+        let message : string = validatable.message;
+    }
 
 
     {
@@ -32,17 +64,24 @@ describe('compiler compatible', ()=>{
         let value : any = validatable.value;
         // @ts-expect-error
         let message : number = validatable.message;
-
     }
-
 })
 
 it('valid', function () {
 
     let validatable = filter.validate('str');
-    expect(validatable.valid).toBeTrue();
-    expect(validatable.value).toBe('str');
-    expect(validatable.message).toBe('message');
+
+    if(validatable.valid) {
+
+        expect(validatable.valid).toBeTrue();
+        expect(validatable.value.data).toBe('str');
+        expect(validatable.message).toBe('message');
+
+    } else {
+
+        fail('validatable should valid');
+    }
+
 });
 
 
