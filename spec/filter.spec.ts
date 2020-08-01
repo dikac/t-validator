@@ -1,17 +1,21 @@
 import Callback from "../dist/callback";
 import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Filter from "../dist/filter";
-import Construct from "../dist/return/construct";
+import Construct from "../dist/return/return";
 import Message from "@dikac/t-message/message";
+import Instance from "../dist/parameter/instance/instance";
+
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 let callback = new Callback(
-    (value)=><Construct<any, any, string, Message<string>>>ValidatableType(value, 'string')
+    (value)=><Construct<any, any, string, Instance<string, string>>>ValidatableType(value, 'string')
 );
 
 
-let filter = new Filter<any, { data : string }, Message<string>>(callback, function (validatable : Construct<any, any, string, Message<string>>) : Construct<any, any, { data : string }, Message<string>> {
+let filter = new Filter<any, { data : string }, Instance<string, string>>(callback,
+    function (validatable : Construct<any, any, string, Instance<string, string>>
+) : Construct<any, any, { data : string }, Instance<string, string>> {
 
     if(validatable.valid) {
 

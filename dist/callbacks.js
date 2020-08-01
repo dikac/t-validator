@@ -17,7 +17,7 @@
         }
         validate(value) {
             const valid = this.validation(value);
-            const result = {
+            const partial = {
                 get valid() {
                     return valid;
                 },
@@ -25,8 +25,8 @@
                     return value;
                 }
             };
-            let message = memoize_1.default(this.message, result);
-            Object.defineProperty(result, 'message', {
+            let message = memoize_1.default(this.message, partial);
+            let result = Object.defineProperty(partial, 'message', {
                 get: message
             });
             return result;

@@ -1,26 +1,26 @@
 import Validator from "./validator";
+import Infer from "./return/infer";
 import Return from "./return/return";
-import Message from "@dikac/t-message/message";
-import Construct from "./return/construct";
+import Instance from "./parameter/instance/instance";
 
 
 export default class Filter<
     Base = unknown,
     Type extends Base = Base,
-    Extent extends Message = Message,
+    Extent extends Instance<Base> = Instance<Base>,
     Container extends Validator = Validator,
 > implements Validator<Base, Type, Extent> {
 
     constructor(
         public subject : Container,
-        public filter : <Argument extends Base>(result:Return<Container>, argument:Base) => Construct<Base, Argument, Type, Extent>
+        public filter : <Argument extends Base>(result:Infer<Container>, argument:Base) => Return<Base, Argument, Type, Extent>
     ){
 
     }
 
-    validate<Argument extends Base>(value : Argument) : Construct<Base, Argument, Type, Extent> {
+    validate<Argument extends Base>(value : Argument) : Return<Base, Argument, Type, Extent> {
 
-        let validatable : Return<Container> = <Return<Container>> this.subject.validate(value);
+        let validatable : Infer<Container> = <Infer<Container>> this.subject.validate(value);
 
         return this.filter(validatable, value);
     }

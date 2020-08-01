@@ -1,28 +1,28 @@
 import Validator from "./validator";
-import Message from "@dikac/t-message/message";
 import MessageValue from "@dikac/t-message/message/message";
-import Construct from "./return/construct";
+import Return from "./return/return";
 import Memoize from "@dikac/t-function/memoize";
+import Instance from "./parameter/instance/instance";
 
 export default class Callbacks<
     Base = unknown,
     Type extends Base = Base,
-    Extent extends Message = Message
+    Extent extends Instance<Base> = Instance<Base>
     > implements Validator<Base, Type, Extent>
 {
 
     constructor(
-        public message : <Argument extends Base>(argument: Omit<Construct<Base, Argument, Type, Extent>, 'message'>) => MessageValue<Extent>,
+        public message : <Argument extends Base>(argument: Omit<Return<Base, Argument, Type, Extent>, 'message'>) => MessageValue<Extent>,
         public validation : <Argument extends Base>(argument:Base) => boolean,
     ) {
 
     }
 
-    validate<Argument extends Base>(value: Argument) : Readonly<Construct<Base, Argument, Type, Extent>> {
+    validate<Argument extends Base>(value: Argument) : Return<Base, Argument, Type, Extent> {
 
         const valid = this.validation(value);
 
-        const result = <Omit<Construct<Base, Argument, Type, Extent>, 'message'>> {
+        const partial = <Omit<Return<Base, Argument, Type, Extent>, 'message'>> {
             get valid ()  {
                 return valid
             },
@@ -31,12 +31,12 @@ export default class Callbacks<
             }
         }
 
-        let message = Memoize(this.message, result);
+        let message = Memoize(this.message, partial);
 
-        Object.defineProperty(result, 'message', {
+        let result = Object.defineProperty(partial, 'message', {
             get : message
         });
 
-        return <Readonly<Construct<Base, Argument, Type, Extent>>> result;
+        return result;
     }
 }

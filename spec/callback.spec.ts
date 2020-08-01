@@ -1,11 +1,11 @@
 import Callback from "../dist/callback";
-import Construct from "../dist/return/construct";
-import Message from "@dikac/t-message/message";
+import Construct from "../dist/return/return";
 import ValidatableType from "@dikac/t-type/validatable/type-standard";
+import Instance from "../dist/parameter/instance/instance";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback((value)=><Construct<any, any, string, Message<string>>>ValidatableType(value, 'string'));
+let callback = new Callback(<Argument extends any>(value : Argument)=><Construct<any, Argument, string, Instance<string, string>>>ValidatableType(value, 'string'));
 
 
 describe('compiler compatibility', ()=>{
