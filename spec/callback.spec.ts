@@ -5,7 +5,7 @@ import Instance from "../dist/parameter/instance/instance";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback(<Argument extends any>(value : Argument)=><Construct<any, Argument, string, Instance<string, string>>>ValidatableType(value, 'string'));
+let callback = new Callback(<Argument extends any>(value : Argument)=><Construct<any, Argument, string, Instance<any, string>>>ValidatableType(value, 'string'));
 
 
 describe('compiler compatibility', ()=>{
