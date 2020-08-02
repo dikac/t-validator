@@ -6,8 +6,8 @@ import Return from "./return/return";
 /**
  * wrapper for {@link Validator}
  */
-export default class Wrapper<Container extends Validator> implements Validator<BaseInfer<Container>, TypeInfer<Container>, InstanceInfer<Container>> {
-    subject: Container;
-    constructor(subject: Container);
-    validate<Argument extends BaseInfer<Container>>(value: Argument): Return<BaseInfer<Container>, Argument, TypeInfer<Container>, InstanceInfer<Container>>;
+export default class Wrapper<ValidatorT extends Validator> implements Validator<BaseInfer<ValidatorT>, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>> {
+    subject: ValidatorT;
+    constructor(subject: ValidatorT);
+    validate<Argument extends BaseInfer<ValidatorT>>(value: Argument): Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>>;
 }

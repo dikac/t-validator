@@ -8,19 +8,19 @@ export default class Filter<
     Base = unknown,
     Type extends Base = Base,
     Extent extends Instance<Base> = Instance<Base>,
-    Container extends Validator = Validator,
+    ValidatorT extends Validator = Validator,
 > implements Validator<Base, Type, Extent> {
 
     constructor(
-        public subject : Container,
-        public filter : <Argument extends Base>(result:Infer<Container>, argument:Base) => Return<Base, Argument, Type, Extent>
+        public subject : ValidatorT,
+        public filter : <Argument extends Base>(result:Infer<ValidatorT>, argument:Base) => Return<Base, Argument, Type, Extent>
     ){
 
     }
 
     validate<Argument extends Base>(value : Argument) : Return<Base, Argument, Type, Extent> {
 
-        let validatable : Infer<Container> = <Infer<Container>> this.subject.validate(value);
+        let validatable : Infer<ValidatorT> = <Infer<ValidatorT>> this.subject.validate(value);
 
         return this.filter(validatable, value);
     }

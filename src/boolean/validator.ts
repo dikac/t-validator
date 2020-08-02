@@ -2,10 +2,10 @@ import Validator from "../validator";
 import TypeFunction from "@dikac/t-function/boolean/function";
 
 export default function Validator<
-    Assumption extends Validator
+    ValidatorT extends Validator
 >(
     value : object
-) : value is Assumption {
+) : value is ValidatorT {
 
 
     if(!TypeFunction((<Validator>value).validate)) {

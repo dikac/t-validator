@@ -8,18 +8,18 @@ import Return from "./return/return";
  * wrapper for {@link Validator}
  */
 export default class Wrapper<
-    Container extends Validator
-> implements Validator<BaseInfer<Container>, TypeInfer<Container>, InstanceInfer<Container>> {
+    ValidatorT extends Validator
+> implements Validator<BaseInfer<ValidatorT>, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>> {
 
     constructor(
-        public subject : Container
+        public subject : ValidatorT
     ){
 
     }
 
-    validate<Argument extends BaseInfer<Container>>(value : Argument) : Return<BaseInfer<Container>, Argument, TypeInfer<Container>, InstanceInfer<Container>> {
+    validate<Argument extends BaseInfer<ValidatorT>>(value : Argument) : Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>> {
 
-        return <Return<BaseInfer<Container>, Argument, TypeInfer<Container>, InstanceInfer<Container>>> this.subject.validate(value);
+        return <Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>>> this.subject.validate(value);
     }
 }
 
