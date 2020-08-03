@@ -3,11 +3,10 @@ import Return from "./return/return";
 import Instance from "./parameter/instance/instance";
 
 export default class Callback<
-    Base = unknown,
-    Type extends Base = Base,
-    Extent extends Instance<Base> = Instance<Base>
-    > implements Validator<Base, Type, Extent>
-{
+    Base,
+    Type extends Base,
+    Extent extends Instance<Base>
+> implements Validator<Base, Type, Extent> {
 
     constructor(
         private functions : <Argument extends Base>(argument:Base) => Return<Base, Argument, Type, Extent>,

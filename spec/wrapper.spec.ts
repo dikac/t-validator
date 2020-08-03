@@ -2,12 +2,11 @@ import Callback from "../dist/callback";
 import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Wrapper from "../dist/wrapper";
 import Construct from "../dist/return/return";
-import Message from "@dikac/t-message/message";
 import Instance from "../dist/parameter/instance/instance";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Wrapper(new Callback((value)=><Construct<any, any, string, Instance<string, string>>>ValidatableType(value, 'string')));
+let callback = new Wrapper(new Callback((value)=><Construct<any, any, string, Instance<any, string>>>ValidatableType(value, 'string')));
 
 
 describe('compiler compatibility', ()=>{

@@ -2,7 +2,6 @@ import Callback from "../dist/callback";
 import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Filter from "../dist/filter";
 import Construct from "../dist/return/return";
-import Message from "@dikac/t-message/message";
 import Instance from "../dist/parameter/instance/instance";
 
 
