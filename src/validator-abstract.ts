@@ -6,7 +6,6 @@ export default interface ValidatorAbstract<
     Overload extends Instance<Base> = Instance<Base>,
     Origin extends Instance<Base> = Instance<Base>,
 >  {
-
     validate<Argument extends Base>(value : Argument) : ReplaceValue<Overload, Argument> |  Origin;
 }
 

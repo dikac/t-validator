@@ -7,7 +7,6 @@ export default function Validator<
     value : object
 ) : value is ValidatorT {
 
-
     if(!TypeFunction((<Validator>value).validate)) {
 
         return false;

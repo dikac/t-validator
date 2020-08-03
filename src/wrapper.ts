@@ -14,7 +14,6 @@ export default class Wrapper<
     constructor(
         public subject : ValidatorT
     ){
-
     }
 
     validate<Argument extends BaseInfer<ValidatorT>>(value : Argument) : Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>> {

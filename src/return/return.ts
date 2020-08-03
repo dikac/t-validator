@@ -7,7 +7,6 @@ type Return<
     Argument extends Base = Base,
     Type extends Base = Base,
     Extent extends Instance<Base> = Instance<Base>
-
 > =
     ReplaceValue<ReplaceValidatable<Extent, false>, Argument> |
     ReplaceValue<ReplaceValidatable<Extent, true>, Type>
