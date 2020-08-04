@@ -9,17 +9,5 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * wrapper for {@link Validator}
-     */
-    class Wrapper {
-        constructor(validator) {
-            this.validator = validator;
-        }
-        validate(value) {
-            return this.validator.validate(value);
-        }
-    }
-    exports.default = Wrapper;
 });
-//# sourceMappingURL=wrapper.js.map
+//# sourceMappingURL=validator.js.map

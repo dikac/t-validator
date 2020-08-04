@@ -10,12 +10,12 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Filter {
-        constructor(subject, filter) {
-            this.subject = subject;
+        constructor(validator, filter) {
+            this.validator = validator;
             this.filter = filter;
         }
         validate(value) {
-            let validatable = this.subject.validate(value);
+            let validatable = this.validator.validate(value);
             return this.filter(validatable, value);
         }
     }

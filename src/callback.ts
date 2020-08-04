@@ -11,7 +11,6 @@ export default class Callback<
     constructor(
         private functions : <Argument extends Base>(argument:Base) => Return<Base, Argument, Type, Extent>,
     ) {
-
     }
 
     validate<Argument extends Base>(value: Argument) : Return<Base, Argument, Type, Extent> {
