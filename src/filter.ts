@@ -16,13 +16,13 @@ export default class Filter<
 {
     constructor(
         public validator : ValidatorT,
-        public filter : <Argument extends Base>(result:Infer<ValidatorT, Base>, argument:Base) => Validatable<Base, Argument, Type, Extent>
+        public filter : <Argument extends Base>(result:Infer<ValidatorT/*, Base*/>, argument:Base) => Validatable<Base, Argument, Type, Extent>
     ){
     }
 
     validate<Argument extends Base>(value : Argument) : ReturnSimple<Base, Argument, Type, Extent> {
 
-        let validatable : Infer<ValidatorT, Argument> = <Infer<ValidatorT, Argument>> this.validator.validate(value);
+        let validatable : Infer<ValidatorT/*, Argument*/> = <Infer<ValidatorT/*, Argument*/>> this.validator.validate(value);
 
         return <ReturnSimple<Base, Argument, Type, Extent>> this.filter(validatable, value);
     }
