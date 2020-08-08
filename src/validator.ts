@@ -1,33 +1,28 @@
-import ReturnConstruct from "./return/return";
-import InstanceConstruct from "./parameter/instance/instance";
-import ValidatorAbstract from "./validator-abstract";
-import ReplaceValidatable from "@dikac/t-validatable/boolean/replace";
 import ReplaceValue from "@dikac/t-value/value/replace";
+import Instance from "./validatable/instance";
+import Validatable from "./validatable/validatable";
 import Message from "@dikac/t-message/message";
 import Value from "@dikac/t-value/value";
-import Validatable from "@dikac/t-validatable/validatable";
+import ValidatableInterface from "@dikac/t-validatable/validatable";
+
 
 /**
- * validate value
+ * {@template Base} type which can be handled by implmentation
+ * {@template Type} valid value type
  */
 export default interface Validator<
     Base = unknown,
     Type extends Base = Base,
-    Instance extends InstanceConstruct<Base> = InstanceConstruct<Base>
-> extends ValidatorAbstract<
-    Base,
-    ReplaceValidatable<Instance, false>,
-    ReplaceValue<ReplaceValidatable<Instance, true>, Type>
+    Overload extends Instance<Base> = Instance<Base>,
+    Extend extends Instance<Type> =  ReplaceValue<Overload, Type>,
 > {
-
     /**
-     * @param value
+     * {@param value}
      *
      * @return
-     * @link Value contain {@param value}
-     * @link Validatable to determine {@param value} validity
-     * @link Message explain in human readable
+     * {@link Value} contain {@param value}
+     * {@link ValidatableInterface} to determine {@param value} validity
+     * {@link Message} explain in human readable
      */
-    validate<Argument extends Base>(value : Argument) : ReturnConstruct<Base, Argument, Type, Instance>;
+    validate<Argument extends Base>(value : Argument) : Validatable<Base, Argument, Type, Overload, Extend>;
 }
-

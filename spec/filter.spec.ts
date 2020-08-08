@@ -1,20 +1,25 @@
 import Callback from "../dist/callback";
-import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Filter from "../dist/filter";
-import Construct from "../dist/return/return";
-import Instance from "../dist/parameter/instance/instance";
-
+import Construct from "../dist/validatable/simple";
+import Instance from "../dist/validatable/instance";
+import ReturnSimple from "../dist/validatable/simple";
+import ValidatorSimple from "../dist/simple";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback(
-    (value)=><Construct<any, any, string, Instance<string, string>>>ValidatableType(value, 'string')
-);
+let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+    return {
+        value : value,
+        valid : typeof value === "string",
+        message : 'string'
+    } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+});
 
 
-let filter = new Filter<any, { data : string }, Instance<string, string>>(callback,
-    function (validatable : Construct<any, any, string, Instance<string, string>>
-) : Construct<any, any, { data : string }, Instance<string, string>> {
+let filter = new Filter<any, { data : string }, Instance<string, string>>(<ValidatorSimple<unknown, string, Instance<unknown, string>>>callback,
+    function <Argument extends any> (
+        validatable : Construct<any, any, string, Instance<string, string>>
+    ) : Construct<any, Argument, { data : string }, Instance<{ data : string }, string>> {
 
     if(validatable.valid) {
 
@@ -22,7 +27,7 @@ let filter = new Filter<any, { data : string }, Instance<string, string>>(callba
             valid : validatable.valid,
             value : {data : validatable.value},
             message : 'message'
-        };
+        } as Construct<any, Argument, { data : string }, Instance<{ data : string }, string>> ;
 
     } else {
 

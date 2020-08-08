@@ -1,28 +1,31 @@
 import Validator from "./validator";
 import ValidatorContainer from "./validator/validator";
-import BaseInfer from "./parameter/base/infer";
-import TypeInfer from "./parameter/type/infer";
-import InstanceInfer from "./parameter/instance/infer";
-import Return from "./return/return";
+import BaseInfer from "./base/infer";
+import TypeInfer from "./type/infer";
+import OverloadInfer from "./overload/infer";
+import ExtendInfer from "./extend/infer";
+import Validatable from "./validatable/validatable";
 
 /**
- * wrapper for {@link Validator}
+ * wrapper for {@link Simple}
  */
 export default class Wrapper<
     ValidatorT extends Validator
 > implements
-    Validator<BaseInfer<ValidatorT>, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>>,
+    Validator<BaseInfer<ValidatorT>, TypeInfer<ValidatorT>, OverloadInfer<ValidatorT>, ExtendInfer<ValidatorT>>,
     ValidatorContainer<ValidatorT>
 {
-
     constructor(
         public validator : ValidatorT
     ){
     }
 
-    validate<Argument extends BaseInfer<ValidatorT>>(value : Argument) : Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>> {
+    validate<Argument extends BaseInfer<ValidatorT>>(
+        value : Argument
+    ) : Validatable<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, OverloadInfer<ValidatorT>, ExtendInfer<ValidatorT>> {
 
-        return <Return<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, InstanceInfer<ValidatorT>>> this.validator.validate(value);
+        return <Validatable<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, OverloadInfer<ValidatorT>, ExtendInfer<ValidatorT>>>
+            this.validator.validate(value);
     }
 }
 

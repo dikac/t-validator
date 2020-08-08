@@ -1,42 +1,99 @@
 import Callback from "../dist/callback";
-import ValidatableType from "@dikac/t-type/validatable/type-standard";
 import Wrapper from "../dist/wrapper";
-import Construct from "../dist/return/return";
-import Instance from "../dist/parameter/instance/instance";
+import Instance from "../dist/validatable/instance";
+import ReturnSimple from "../dist/validatable/simple";
+import ValidatorSimple from "../dist/simple";
+import Validator from "../dist/validator";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Wrapper(new Callback((value)=><Construct<any, any, string, Instance<any, string>>>ValidatableType(value, 'string')));
+
+class Test implements ValidatorSimple<unknown, string, Instance<unknown, string>> {
+
+    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+
+        return <ReturnSimple<unknown, Argument, string, Instance<unknown, string>>> {
+            valid : typeof value === "string",
+            value : value,
+            message : 'message'
+        }
+    }
+}
+
+let callback = <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Wrapper( <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Callback(
+    function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+        return {
+            value : value,
+            valid : typeof value === "string",
+            message : 'string'
+        } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+    }
+));
+
 
 
 describe('compiler compatibility', ()=>{
 
-    let validatable = callback.validate(1);
-
-    if(validatable.valid) {
+    describe('callback', ()=>{
 
 
-        let boolean : boolean = validatable.valid;
-        let value : string = validatable.value;
-        let message : string = validatable.message;
+        let validatable = callback.validate(1);
 
-    } else {
+        if(validatable.valid) {
 
-        let boolean : boolean = validatable.valid;
-        // @ts-expect-error
-        let value : string = validatable.value;
-        let number : number = validatable.value;
-        let message : string = validatable.message;
-    }
+            let boolean : boolean = validatable.valid;
+            let value : string = validatable.value;
+            let message : string = validatable.message;
+
+        } else {
+
+            let boolean : boolean = validatable.valid;
+            // @ts-expect-error
+            let value : string = validatable.value;
+            let number : number = validatable.value;
+            let message : string = validatable.message;
+        }
 
 
-    {
-        // @ts-expect-error
-        let valid : string = validatable.valid;
-        let value : any = validatable.value;
-        // @ts-expect-error
-        let message : number = validatable.message;
-    }
+        {
+            // @ts-expect-error
+            let valid : string = validatable.valid;
+            let value : any = validatable.value;
+            // @ts-expect-error
+            let message : number = validatable.message;
+        }
+    });
+
+    describe('type', ()=>{
+
+        let callback = <Validator<unknown, string, Instance<unknown, string, false>, Instance<string, string, true>>>new Wrapper( <Validator<unknown, string, Instance<unknown, string, false>, Instance<string, string, true>>>new Test());
+
+        let validatable = callback.validate(1);
+
+        if(validatable.valid) {
+
+            let boolean : boolean = validatable.valid;
+            let value : string = validatable.value;
+            let message : string = validatable.message;
+
+        } else {
+
+            let boolean : boolean = validatable.valid;
+            // @ts-expect-error
+            let value : string = validatable.value;
+            let number : number = validatable.value;
+            let message : string = validatable.message;
+        }
+
+        {
+            // @ts-expect-error
+            let valid : string = validatable.valid;
+            let value : any = validatable.value;
+            // @ts-expect-error
+            let message : number = validatable.message;
+        }
+    });
+
 });
 
 

@@ -1,12 +1,16 @@
 import Callback from "../dist/callback";
-import Construct from "../dist/return/return";
-import ValidatableType from "@dikac/t-type/validatable/type-standard";
-import Instance from "../dist/parameter/instance/instance";
+import Instance from "../dist/validatable/instance";
+import ReturnSimple from "../dist/validatable/simple";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback(<Argument extends any>(value : Argument)=><Construct<any, Argument, string, Instance<any, string>>>ValidatableType(value, 'string'));
-
+let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+    return {
+        value : value,
+        valid : typeof value === "string",
+        message : 'string'
+    } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+});
 
 describe('compiler compatibility', ()=>{
 

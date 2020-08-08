@@ -1,2 +1,2 @@
-import Validator from "../validator";
-export default function Validator<ValidatorT extends Validator>(value: object): value is ValidatorT;
+import Simple from "../simple";
+export default function Validator<ValidatorT extends Simple>(value: object): value is ValidatorT;

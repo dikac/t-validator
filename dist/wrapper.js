@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
-     * wrapper for {@link Validator}
+     * wrapper for {@link Simple}
      */
     class Wrapper {
         constructor(validator) {
