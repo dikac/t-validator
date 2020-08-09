@@ -1,7 +1,7 @@
 import Callback from "../../dist/validatable/callback";
 import Value from "@dikac/t-value/value";
 import Validatable from "@dikac/t-validatable/validatable";
-import Type from "@dikac/t-type/boolean/type";
+
 
 it("enable console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -60,7 +60,7 @@ describe('construct', function () {
 
     it("data", () => {
 
-        let wrapper = Callback({}, (v)=>Type(v, "object"), TestMessage);
+        let wrapper = Callback({}, (v)=>typeof v === "object", TestMessage);
 
         expect(wrapper.valid).toBeTrue()
         expect(wrapper.value).toEqual({})
@@ -74,7 +74,7 @@ describe('set', function () {
 
     it("data", () => {
 
-        let wrapper = Callback('str', (v)=>Type(v, "object"), TestMessage);
+        let wrapper = Callback('str', (v)=>typeof v === "object", TestMessage);
 
         expect(wrapper.valid).toBeFalse()
         expect(wrapper.value).toBe('str')
