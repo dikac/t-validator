@@ -1,7 +1,10 @@
 import Simple from "./simple";
 import SimpleReturn from "./validatable/simple";
-import Memoize from "@dikac/t-function/memoize";
 import Instance from "./validatable/instance";
+import ValidationCallback from "./validatable/callback";
+import Replace from "./validatable/replace";
+import Implement from "./validatable/implement";
+import Validatable from "./validatable/validatable";
 
 export default class Callbacks<
     Base = unknown,
@@ -15,25 +18,12 @@ export default class Callbacks<
     ) {
     }
 
-    validate<Argument extends Base>(value: Argument) : SimpleReturn<Base, Argument, Type, Readonly<Instance<Base, MessageT>>> {
+    validate<Argument extends Type>(value: Argument) : Instance<Base, MessageT, true>;
+    validate<Argument extends Base>(value: Argument) : Validatable<Base, Argument, Type, false, true, Instance<Base, MessageT>>;
+    //validate<Argument extends Base>(value: Argument) : Replace<Argument, false, Instance<Base, MessageT>>;
+    validate<Argument extends Base>(value: Argument) : Implement<Type, Argument, false, true, Instance<Base, MessageT>>
+    {
 
-        const valid = this.validation(value);
-
-        const partial = <Omit<SimpleReturn<Base, Argument, Type, Readonly<Instance<Base, MessageT>>>, 'message'>> {
-            get valid ()  {
-                return valid
-            },
-            get value () : Argument|Type {
-                return value
-            }
-        }
-
-        let message = Memoize(this.message, partial);
-
-        let result = Object.defineProperty(partial, 'message', {
-            get : message
-        });
-
-        return result;
+        return <SimpleReturn<Base, Argument, Type, Readonly<Instance<Base, MessageT>>>> ValidationCallback(value, this.validation, this.message);
     }
 }

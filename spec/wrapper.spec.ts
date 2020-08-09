@@ -4,21 +4,10 @@ import Instance from "../dist/validatable/instance";
 import ReturnSimple from "../dist/validatable/simple";
 import ValidatorSimple from "../dist/simple";
 import Validator from "../dist/validator";
+import TestString from "./test-string";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-
-class Test implements ValidatorSimple<unknown, string, Instance<unknown, string>> {
-
-    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
-
-        return <ReturnSimple<unknown, Argument, string, Instance<unknown, string>>> {
-            valid : typeof value === "string",
-            value : value,
-            message : 'message'
-        }
-    }
-}
 
 let callback = <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Wrapper( <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Callback(
     function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
@@ -54,7 +43,6 @@ describe('compiler compatibility', ()=>{
             let message : string = validatable.message;
         }
 
-
         {
             // @ts-expect-error
             let valid : string = validatable.valid;
@@ -66,7 +54,7 @@ describe('compiler compatibility', ()=>{
 
     describe('type', ()=>{
 
-        let callback = <Validator<unknown, string, Instance<unknown, string, false>, Instance<string, string, true>>>new Wrapper( <Validator<unknown, string, Instance<unknown, string, false>, Instance<string, string, true>>>new Test());
+        let callback = new Wrapper(new TestString());
 
         let validatable = callback.validate(1);
 

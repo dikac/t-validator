@@ -1,10 +1,11 @@
-import ReplaceValue from "@dikac/t-value/value/replace";
-import Instance from "./validatable/instance";
+import InstanceInterface from "./validatable/instance";
 import Validatable from "./validatable/validatable";
 import Message from "@dikac/t-message/message";
 import Value from "@dikac/t-value/value";
 import ValidatableInterface from "@dikac/t-validatable/validatable";
-
+import ReplaceValue from "@dikac/t-value/value/replace";
+import ValidatableReplace from "@dikac/t-validatable/boolean/replace";
+import Replace from "./validatable/replace";
 
 /**
  * {@template Base} type which can be handled by implmentation
@@ -13,8 +14,9 @@ import ValidatableInterface from "@dikac/t-validatable/validatable";
 export default interface Validator<
     Base = unknown,
     Type extends Base = Base,
-    Overload extends Instance<Base> = Instance<Base>,
-    Extend extends Instance<Type> =  ReplaceValue<Overload, Type>,
+    Overload extends boolean = boolean,
+    Extend extends boolean = boolean,
+    Instance extends InstanceInterface<Base> = InstanceInterface<Base>,
 > {
     /**
      * {@param value}
@@ -22,7 +24,10 @@ export default interface Validator<
      * @return
      * {@link Value} contain {@param value}
      * {@link ValidatableInterface} to determine {@param value} validity
-     * {@link Message} explain in human readable
+     * {@link Message} explanation in human readable
      */
-    validate<Argument extends Base>(value : Argument) : Validatable<Base, Argument, Type, Overload, Extend>;
+    validate<Argument extends Type>(value : Argument) : Replace<Argument, Extend, Instance>;
+    validate<Argument extends Base>(value : Argument) : Validatable<Base, Argument, Type, Overload, Extend, Instance>;
+    // validate<Argument extends Base>(value : Argument) : Replace<Argument, Overload, Instance>;
 }
+

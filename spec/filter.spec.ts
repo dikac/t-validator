@@ -96,9 +96,23 @@ it('valid', function () {
 it('invalid', function () {
 
     let validatable = filter.validate(1);
-    expect(validatable.valid).toBeFalse();
-    expect(validatable.value).toBe(1);
-    expect(validatable.message).toBe('message');
+
+    if(validatable.valid) {
+
+        fail('validatable should not valid');
+
+        expect(validatable.valid).toBeFalse();
+        expect(validatable.value).toBe({data:''});
+        expect(validatable.message).toBe('message');
+
+    } else {
+
+        expect(validatable.valid).toBeFalse();
+        expect(validatable.value).toBe(1);
+        expect(validatable.message).toBe('message');
+
+    }
+
 });
 
 

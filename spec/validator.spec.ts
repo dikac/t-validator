@@ -1,6 +1,9 @@
 import ValidatorSimple from "../dist/simple";
 import ReturnSimple from "../dist/validatable/simple";
 import Instance from "../dist/validatable/instance";
+import TestObject from "./test-object";
+import TestString from "./test-string";
+import TestReadonly from "./test-readonly";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
@@ -9,20 +12,8 @@ describe('compiler compatibility', ()=>{
 
     describe('writable', () => {
 
-        class Test implements ValidatorSimple<unknown, string, Instance<unknown, string>> {
 
-            validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
-
-                return <ReturnSimple<unknown, Argument, string, Instance<unknown, string>>> {
-                    valid : typeof value === "string",
-                    value : value,
-                    message : 'message'
-                }
-            }
-
-        }
-
-        let test = new Test();
+        let test = new TestString();
         let validatable = test.validate(1);
 
         if(validatable.valid) {
@@ -59,21 +50,7 @@ describe('compiler compatibility', ()=>{
 
     describe('type', () => {
 
-        class Test implements ValidatorSimple<unknown, object, Instance<unknown, string>> {
-
-            validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, object, Instance<unknown, string>> {
-
-                return <ReturnSimple<unknown, Argument, object, Instance<unknown, string>>> {
-                    valid : typeof value === "object",
-                    value : value,
-                    message : 'message'
-                }
-            }
-
-        }
-
-
-        let test = new Test();
+        let test = new TestObject();
 
         describe('typed', () => {
 
@@ -82,7 +59,7 @@ describe('compiler compatibility', ()=>{
             if(validatable.valid) {
 
                 let value : object = validatable.value;
-                let exact : Test = validatable.value;
+                let exact : TestObject = validatable.value;
 
                 let boolean : boolean = validatable.valid;
                 let message : string = validatable.message;
@@ -93,7 +70,7 @@ describe('compiler compatibility', ()=>{
 
                 let value : object = validatable.value;
 
-                let number : Test = validatable.value;
+                let number : TestObject = validatable.value;
 
                 let message : string = validatable.message;
             }
@@ -110,7 +87,7 @@ describe('compiler compatibility', ()=>{
 
                 let value : object = validatable.value;
                 // @ts-expect-error
-                let exact : Test = validatable.value;
+                let exact : TestObject = validatable.value;
 
                 let boolean : boolean = validatable.valid;
 
@@ -127,7 +104,7 @@ describe('compiler compatibility', ()=>{
                 let value : object = validatable.value;
 
                 // @ts-expect-error
-                let number : Test = validatable.value;
+                let number : TestObject = validatable.value;
 
                 let message : string = validatable.message;
             }
@@ -138,20 +115,8 @@ describe('compiler compatibility', ()=>{
 
     describe('readonly', () => {
 
-        class Test implements ValidatorSimple<unknown, string, Readonly<Instance<unknown, string>>> {
 
-            validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Readonly<Instance<unknown, string>>> {
-
-                return <ReturnSimple<unknown, Argument, string, Instance<unknown, string>>> {
-                    valid : typeof value === "string",
-                    value : value,
-                    message : 'message'
-                }
-            }
-        }
-
-
-        let test = new Test();
+        let test = new TestReadonly();
         let validatable = test.validate(1);
 
         if(validatable.valid) {

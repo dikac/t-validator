@@ -1,12 +1,12 @@
 import Validator from "../validator";
 import Validatable from "./validatable";
-import BaseInfer from "../base/infer";
 
-type Infer<Type> = Type extends Validator<
+type Infer<ValidatorT/*, Base , Argument extends Base*/> = ValidatorT extends Validator<
     infer Base,
     infer Type,
-    infer Instance,
-    infer Extend
-> ? Validatable<Base, Base, Type, Instance, Extend> : never;
+    infer Overload,
+    infer Extend,
+    infer Instance
+> ? Validatable<Base, Base, Type, Overload, Extend, Instance> : never;
 
 export default Infer;

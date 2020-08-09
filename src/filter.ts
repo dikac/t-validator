@@ -4,6 +4,12 @@ import Validatable from "./validatable/validatable";
 import ReturnSimple from "./validatable/simple";
 import Instance from "./validatable/instance";
 import ValidatorContainer from "./validator/validator";
+import Replace from "./validatable/replace";
+import OverloadInfer from "./overload/infer";
+import ValidatableInfer from "./instance/infer";
+import TypeInfer from "./type/infer";
+import Validator from "./validator";
+import Implement from "./validatable/implement";
 
 export default class Filter<
     Base = unknown,
@@ -11,18 +17,23 @@ export default class Filter<
     Extent extends Instance<Base> = Instance<Base>,
     ValidatorT extends Simple = Simple,
 > implements
-    Simple<Base, Type, Extent>,
+    Validator<Base, Type, false, true, Extent>,
     ValidatorContainer<ValidatorT>
 {
     constructor(
         public validator : ValidatorT,
-        public filter : <Argument extends Base>(result:Infer<ValidatorT/*, Base*/>, argument:Base) => Validatable<Base, Argument, Type, Extent>
+        public filter : <Argument extends Base>(result:Infer<ValidatorT/*, Base, Argument*/>, argument:Base) => Validatable<Base, Argument, Type, boolean, boolean, Extent>
     ){
     }
 
-    validate<Argument extends Base>(value : Argument) : ReturnSimple<Base, Argument, Type, Extent> {
+    validate<Argument extends Type>(value : Argument) : Replace<Argument, true, Extent>;
+    validate<Argument extends Base>(value : Argument) : Validatable<Base, Argument, Type, false, true, Extent>;
+    //validate<Argument extends Base>(value : Argument) : Replace<Argument, false, Extent>;
 
-        let validatable : Infer<ValidatorT/*, Argument*/> = <Infer<ValidatorT/*, Argument*/>> this.validator.validate(value);
+    validate<Argument extends Base>(value : Argument) : Implement<Type, Argument, false, true, Extent>
+    {
+
+        let validatable : Infer<ValidatorT/*, Base, Argument*/> = <Infer<ValidatorT/*, Base, Argument*/>> this.validator.validate(value);
 
         return <ReturnSimple<Base, Argument, Type, Extent>> this.filter(validatable, value);
     }

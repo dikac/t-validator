@@ -9,15 +9,5 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class Callback {
-        constructor(functions) {
-            this.functions = functions;
-        }
-        //validate<Argument extends Base>(value: Argument) : Replace<Argument, false, Extent>;
-        validate(value) {
-            return this.functions(value);
-        }
-    }
-    exports.default = Callback;
 });
-//# sourceMappingURL=callback.js.map
+//# sourceMappingURL=infer.js.map

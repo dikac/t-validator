@@ -1,6 +1,4 @@
-import ReplaceValidatable from "@dikac/t-validatable/boolean/replace";
-import ReplaceValue from "@dikac/t-value/value/replace";
 import Instance from "./instance";
 import Validatable from "./validatable";
-declare type Simple<Base = unknown, Argument extends Base = Base, Type extends Base = Base, Extent extends Instance<Base> = Instance<Base>> = Validatable<Base, Argument, Type, ReplaceValidatable<Extent, false>, ReplaceValue<ReplaceValidatable<Extent, true>, Type>>;
+declare type Simple<Base = unknown, Argument extends Base = Base, Type extends Base = Base, InstanceT extends Instance<Base> = Instance<Base>> = Validatable<Base, Argument, Type, false, true, InstanceT>;
 export default Simple;

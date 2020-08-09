@@ -5,6 +5,11 @@ import TypeInfer from "./type/infer";
 import OverloadInfer from "./overload/infer";
 import ExtendInfer from "./extend/infer";
 import Validatable from "./validatable/validatable";
+import ValidatableInfer from "./instance/infer";
+import Replace from "./validatable/replace";
+import Simple from "./validatable/simple";
+import Implement from "./validatable/implement";
+
 
 /**
  * wrapper for {@link Simple}
@@ -20,12 +25,13 @@ export default class Wrapper<
     ){
     }
 
-    validate<Argument extends BaseInfer<ValidatorT>>(
-        value : Argument
-    ) : Validatable<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, OverloadInfer<ValidatorT>, ExtendInfer<ValidatorT>> {
+    validate<Argument extends BaseInfer<ValidatorT>>(value : Argument) : Simple<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, ValidatableInfer<ValidatorT>>
 
-        return <Validatable<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, OverloadInfer<ValidatorT>, ExtendInfer<ValidatorT>>>
-            this.validator.validate(value);
+    validate<Argument extends TypeInfer<ValidatorT>>(value : Argument) : Replace<Argument, ExtendInfer<ValidatorT>, ValidatableInfer<ValidatorT>>
+
+    validate<Argument extends BaseInfer<ValidatorT>>(value : Argument) {
+
+        return  this.validator.validate(value);
     }
 }
 
