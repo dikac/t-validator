@@ -1,19 +1,19 @@
 import ValueInfer from "@dikac/t-value/value/infer";
 import ReadonlyWrapper from "./readonly-wrapper";
 import Function from "@dikac/t-function/function";
-import Instance from "./instance";
+import Validatable from "./validatable";
 /**
  * @inheritDoc {@link ReadonlyWrapper}
  *
  * throw exception when {@link Validatable} is in valid (false) when
  * accessing value {@link Value}
  */
-export default class Asserted<InstanceT extends Instance = Instance> extends ReadonlyWrapper<InstanceT> {
-    error: Function<[InstanceT], Error>;
+export default class Asserted<ValidatableT extends Validatable = Validatable> extends ReadonlyWrapper<ValidatableT> {
+    error: Function<[ValidatableT], Error>;
     /**
      * @param subject
      * @param error
      */
-    constructor(subject: InstanceT, error?: Function<[InstanceT], Error>);
-    get value(): ValueInfer<InstanceT>;
+    constructor(subject: ValidatableT, error?: Function<[ValidatableT], Error>);
+    get value(): ValueInfer<ValidatableT>;
 }

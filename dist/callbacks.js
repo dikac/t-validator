@@ -15,7 +15,6 @@
             this.message = message;
             this.validation = validation;
         }
-        //validate<Argument extends Base>(value: Argument) : Replace<Argument, false, Instance<Base, MessageT>>;
         validate(value) {
             return callback_1.default(value, this.validation, this.message);
         }

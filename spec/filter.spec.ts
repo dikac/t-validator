@@ -1,25 +1,25 @@
 import Callback from "../dist/callback";
 import Filter from "../dist/filter";
 import Construct from "../dist/validatable/simple";
-import Instance from "../dist/validatable/instance";
+import Validatable from "../dist/validatable/validatable";
 import ReturnSimple from "../dist/validatable/simple";
 import ValidatorSimple from "../dist/simple";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Validatable<unknown, string>> {
     return {
         value : value,
         valid : typeof value === "string",
         message : 'string'
-    } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+    } as ReturnSimple<unknown, Argument, string, Validatable<unknown, string>>
 });
 
 
-let filter = new Filter<any, { data : string }, Instance<string, string>>(<ValidatorSimple<unknown, string, Instance<unknown, string>>>callback,
+let filter = new Filter<any, { data : string }, Validatable<string, string>>(<ValidatorSimple<unknown, string, Validatable<unknown, string>>>callback,
     function <Argument extends any> (
-        validatable : Construct<any, any, string, Instance<string, string>>
-    ) : Construct<any, Argument, { data : string }, Instance<{ data : string }, string>> {
+        validatable : Construct<any, any, string, Validatable<string, string>>
+    ) : Construct<any, Argument, { data : string }, Validatable<{ data : string }, string>> {
 
     if(validatable.valid) {
 
@@ -27,7 +27,7 @@ let filter = new Filter<any, { data : string }, Instance<string, string>>(<Valid
             valid : validatable.valid,
             value : {data : validatable.value},
             message : 'message'
-        } as Construct<any, Argument, { data : string }, Instance<{ data : string }, string>> ;
+        } as Construct<any, Argument, { data : string }, Validatable<{ data : string }, string>> ;
 
     } else {
 

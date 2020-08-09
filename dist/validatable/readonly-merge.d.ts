@@ -4,11 +4,11 @@ import Value from "@dikac/t-value/value";
 import ValidatableInterface from "@dikac/t-validatable/validatable";
 import InferValidatable from "@dikac/t-validatable/boolean/infer";
 import InferValue from "@dikac/t-value/value/infer";
-import Instance from "./instance";
+import Validatable from "./validatable";
 /**
  * merge {@link Value}, {@link Message} and {@link ValidatableInterface}
  */
-export default class ReadonlyMerge<ValueT extends Value, MessageT extends Message, ValidatableT extends ValidatableInterface> implements Readonly<Instance<InferValue<ValueT>, InferMessage<MessageT>, InferValidatable<ValidatableT>>> {
+export default class ReadonlyMerge<ValueT extends Value, MessageT extends Message, ValidatableT extends ValidatableInterface> implements Readonly<Validatable<InferValue<ValueT>, InferMessage<MessageT>, InferValidatable<ValidatableT>>> {
     readonly valueContainer: ValueT;
     readonly messageContainer: MessageT;
     readonly validatableContainer: ValidatableT;

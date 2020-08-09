@@ -1,19 +1,19 @@
-import InstanceInterface from "./validatable/instance";
-import Validatable from "./validatable/validatable";
+import AmbiguousInterface from "./validatable/ambiguous";
 import Replace from "./validatable/replace";
+import Validatable from "./validatable/validatable";
 /**
  * {@template Base} type which can be handled by implmentation
  * {@template Type} valid value type
  */
-export default interface Validator<Base = unknown, Type extends Base = Base, Overload extends boolean = boolean, Extend extends boolean = boolean, Instance extends InstanceInterface<Base> = InstanceInterface<Base>> {
+export default interface Validator<Base = unknown, Type extends Base = Base, Ambiguous extends boolean = boolean, Match extends boolean = boolean, ValidatableT extends Validatable<Base> = Validatable<Base>> {
     /**
      * {@param value}
      *
      * @return
      * {@link Value} contain {@param value}
-     * {@link ValidatableInterface} to determine {@param value} validity
+     * {@link Validatable.valid} to determine {@param value} validity
      * {@link Message} explanation in human readable
      */
-    validate<Argument extends Type>(value: Argument): Replace<Argument, Extend, Instance>;
-    validate<Argument extends Base>(value: Argument): Validatable<Base, Argument, Type, Overload, Extend, Instance>;
+    validate<Argument extends Type>(value: Argument): Replace<Argument, Match, ValidatableT>;
+    validate<Argument extends Base>(value: Argument): AmbiguousInterface<Base, Argument, Type, Ambiguous, Match, ValidatableT>;
 }

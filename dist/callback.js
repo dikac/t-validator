@@ -13,7 +13,6 @@
         constructor(functions) {
             this.functions = functions;
         }
-        //validate<Argument extends Base>(value: Argument) : Replace<Argument, false, Extent>;
         validate(value) {
             return this.functions(value);
         }

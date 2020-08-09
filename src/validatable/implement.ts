@@ -1,16 +1,16 @@
-import InstanceInterface from "./instance";
+import ValidatableI from "./validatable";
 import Replace from "./replace";
 
 type Implement<
     Type,
     Argument,
-    Overload extends boolean,
-    Extend extends boolean,
-    Instance extends InstanceInterface
+    Ambiguous extends boolean,
+    Match extends boolean,
+    Validatable extends ValidatableI
 > =
-    Replace<Argument, Extend, Instance> |
-    Replace<Type, Extend, Instance> |
-    Replace<Argument, Overload, Instance>
+    Replace<Argument, Match, Validatable> |
+    Replace<Type, Match, Validatable> |
+    Replace<Argument, Ambiguous, Validatable>
 ;
 
 export default Implement;

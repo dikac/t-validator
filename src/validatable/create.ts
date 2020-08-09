@@ -1,4 +1,4 @@
-import Instance from "./instance";
+import Validatable from "./validatable";
 
 export default function Create<
     ValueT,
@@ -8,7 +8,7 @@ export default function Create<
     value : ValueT,
     valid : Valid,
     message : MessageT
-) : Instance<ValueT, MessageT, Valid> {
+) : Validatable<ValueT, MessageT, Valid> {
 
     return {
         message : message,

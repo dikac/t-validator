@@ -1,12 +1,12 @@
 import Validator from "../validator";
-import Validatable from "./validatable";
+import AmbiguousInterface from "./ambiguous";
 
-type Infer<ValidatorT/*, Base , Argument extends Base*/> = ValidatorT extends Validator<
+type Infer<ValidatorT> = ValidatorT extends Validator<
     infer Base,
     infer Type,
-    infer Overload,
-    infer Extend,
-    infer Instance
-> ? Validatable<Base, Base, Type, Overload, Extend, Instance> : never;
+    infer Ambiguous,
+    infer Match,
+    infer Validatable
+> ? AmbiguousInterface<Base, Base, Type, Ambiguous, Match, Validatable> : never;
 
 export default Infer;

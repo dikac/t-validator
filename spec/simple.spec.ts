@@ -1,14 +1,12 @@
 import Simple from "../dist/simple";
 import Validator from "../dist/validator";
-import Validatable from "../dist/validatable/instance";
+import Validatable from "../dist/validatable/validatable";
 import BaseInfer from "../dist/base/infer";
 import TypeInfer from "../dist/type/infer";
-import OverloadInfer from "../dist/overload/infer";
 import ValidatorInfer from "../dist/validatable/infer";
-import ExtendInfer from "../dist/extend/infer";
+import ExtendInfer from "../dist/match/infer";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
-
 
 
 describe('compiler compatibility', () => {

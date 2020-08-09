@@ -1,6 +1,3 @@
-import ValidatorSimple from "../dist/simple";
-import ReturnSimple from "../dist/validatable/simple";
-import Instance from "../dist/validatable/instance";
 import TestObject from "./test-object";
 import TestString from "./test-string";
 import TestReadonly from "./test-readonly";
@@ -9,9 +6,7 @@ it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 describe('compiler compatibility', ()=>{
 
-
     describe('writable', () => {
-
 
         let test = new TestString();
         let validatable = test.validate(1);

@@ -4,7 +4,7 @@ import InferMessage from "@dikac/t-message/message/infer";
 import ValueWrapper from "@dikac/t-validatable/readonly-wrapper";
 import Value from "@dikac/t-value/value";
 import InferValue from "@dikac/t-value/value/infer";
-import Instance from "./instance";
+import Validatable from "./validatable";
 import InferValidatable from "@dikac/t-validatable/boolean/infer";
 
 /**
@@ -12,9 +12,11 @@ import InferValidatable from "@dikac/t-validatable/boolean/infer";
  */
 
 export default class ReadonlyWrapper<
-    Subject extends Instance
-> extends ValueWrapper<Subject> implements
-    Readonly<Instance<
+    Subject extends Validatable
+> extends
+    ValueWrapper<Subject>
+implements
+    Readonly<Validatable<
         InferValue<Subject>,
         InferMessage<Subject>,
         InferValidatable<Subject>

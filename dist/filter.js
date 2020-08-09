@@ -14,7 +14,6 @@
             this.validator = validator;
             this.filter = filter;
         }
-        //validate<Argument extends Base>(value : Argument) : Replace<Argument, false, Extent>;
         validate(value) {
             let validatable = this.validator.validate(value);
             return this.filter(validatable, value);

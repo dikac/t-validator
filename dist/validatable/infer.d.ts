@@ -1,4 +1,4 @@
 import Validator from "../validator";
-import Validatable from "./validatable";
-declare type Infer<ValidatorT> = ValidatorT extends Validator<infer Base, infer Type, infer Overload, infer Extend, infer Instance> ? Validatable<Base, Base, Type, Overload, Extend, Instance> : never;
+import AmbiguousInterface from "./ambiguous";
+declare type Infer<ValidatorT> = ValidatorT extends Validator<infer Base, infer Type, infer Ambiguous, infer Match, infer Validatable> ? AmbiguousInterface<Base, Base, Type, Ambiguous, Match, Validatable> : never;
 export default Infer;

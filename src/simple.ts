@@ -1,4 +1,4 @@
-import Instance from "./validatable/instance";
+import Validatable from "./validatable/validatable";
 import Validator from "./validator";
 
 /**
@@ -8,6 +8,7 @@ import Validator from "./validator";
 type Simple<
     Base = unknown,
     Type extends Base = Base,
-    InstanceT extends Instance<Base> = Instance<Base>
-> = Validator<Base, Type, false, true, InstanceT>;
+    ValidatableT extends Validatable<Base> = Validatable<Base>
+> = Validator<Base, Type, false, true, ValidatableT>;
+
 export default Simple;

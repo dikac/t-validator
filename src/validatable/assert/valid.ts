@@ -1,6 +1,6 @@
 import ValidatableInterface from "@dikac/t-validatable/validatable";
 import Function from "@dikac/t-function/function";
-import Instance from "../instance";
+import Validatable from "../validatable";
 import ThrowableValid from "../throwable/valid";
 
 /**
@@ -9,7 +9,7 @@ import ThrowableValid from "../throwable/valid";
 
 export default function Valid<
     Assumption extends Argument,
-    Argument extends Instance = Instance,
+    Argument extends Validatable = Validatable,
 >(
     value : Argument,
     error : Function<[Argument], Error> = ThrowableValid

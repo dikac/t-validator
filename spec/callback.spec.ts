@@ -1,15 +1,15 @@
 import Callback from "../dist/callback";
-import Instance from "../dist/validatable/instance";
+import Validatable from "../dist/validatable/validatable";
 import ReturnSimple from "../dist/validatable/simple";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+let callback = new Callback(function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Validatable<unknown, string>> {
     return {
         value : value,
         valid : typeof value === "string",
         message : 'string'
-    } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+    } as ReturnSimple<unknown, Argument, string, Validatable<unknown, string>>
 });
 
 describe('compiler compatibility', ()=>{

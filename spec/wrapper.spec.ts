@@ -1,21 +1,20 @@
 import Callback from "../dist/callback";
 import Wrapper from "../dist/wrapper";
-import Instance from "../dist/validatable/instance";
+import Validatable from "../dist/validatable/validatable";
 import ReturnSimple from "../dist/validatable/simple";
 import ValidatorSimple from "../dist/simple";
-import Validator from "../dist/validator";
 import TestString from "./test-string";
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 
-let callback = <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Wrapper( <ValidatorSimple<unknown, string, Instance<unknown, string>>>new Callback(
-    function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Instance<unknown, string>> {
+let callback = <ValidatorSimple<unknown, string, Validatable<unknown, string>>>new Wrapper( <ValidatorSimple<unknown, string, Validatable<unknown, string>>>new Callback(
+    function <Argument extends unknown> (value : Argument) : ReturnSimple<unknown, Argument, string, Validatable<unknown, string>> {
         return {
             value : value,
             valid : typeof value === "string",
             message : 'string'
-        } as ReturnSimple<unknown, Argument, string, Instance<unknown, string>>
+        } as ReturnSimple<unknown, Argument, string, Validatable<unknown, string>>
     }
 ));
 
@@ -24,7 +23,6 @@ let callback = <ValidatorSimple<unknown, string, Instance<unknown, string>>>new 
 describe('compiler compatibility', ()=>{
 
     describe('callback', ()=>{
-
 
         let validatable = callback.validate(1);
 

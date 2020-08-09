@@ -1,15 +1,15 @@
 import ValidatorSimple from "../dist/simple";
-import Instance from "../dist/validatable/instance";
+import Validatable from "../dist/validatable/validatable";
 import ReturnSimple from "../dist/validatable/simple";
 
-export default class TestReadonly implements ValidatorSimple<unknown, string, Readonly<Instance<unknown, string>>> {
+export default class TestReadonly implements ValidatorSimple<unknown, string, Readonly<Validatable<unknown, string>>> {
 
-    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Readonly<Instance<unknown, string>>>
-    validate<Argument extends string>(value: Argument): Readonly<Instance<Argument, string, true>>
-    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Readonly<Instance<unknown, string>>> | Readonly<Instance<Argument, string, true>>
+    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Readonly<Validatable<unknown, string>>>
+    validate<Argument extends string>(value: Argument): Readonly<Validatable<Argument, string, true>>
+    validate<Argument extends unknown>(value: Argument): ReturnSimple<unknown, Argument, string, Readonly<Validatable<unknown, string>>> | Readonly<Validatable<Argument, string, true>>
     {
 
-        return <ReturnSimple<unknown, Argument, string, Instance<unknown, string>>> {
+        return <ReturnSimple<unknown, Argument, string, Validatable<unknown, string>>> {
             valid : typeof value === "string",
             value : value,
             message : 'message'
