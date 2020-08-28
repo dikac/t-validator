@@ -1,5 +1,4 @@
 import Value from "@dikac/t-value/value";
-import Function from "@dikac/t-function/function";
 import Message from "@dikac/t-message/message";
 import Validatable from "@dikac/t-validatable/validatable";
 import Return from "./simple";
@@ -13,7 +12,7 @@ export default function Equal<
 >(
     value : ValueT,
     type : TypeT,
-    message : Function<[Readonly<Value<[ValueT, TypeT]> & Validatable<boolean>>], MessageT>,
+    message : (result:Readonly<Value<[ValueT, TypeT]> & Validatable<boolean>>)=>MessageT,
 ) : Return<BaseTemplate, ValueT, TypeT, Readonly<Value<ValueT> & Validatable & Message<MessageT>>> {
 
     const base = {
@@ -43,7 +42,7 @@ export default function Equal<
 
         get message() {
 
-            return MemoizeGetter(this, 'message', ()=>message(base))
+            return MemoizeGetter(this, 'message', message(base))
         }
     };
 }

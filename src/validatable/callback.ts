@@ -1,8 +1,6 @@
 import Value from "@dikac/t-value/value";
-import Function from "@dikac/t-function/function";
 import Message from "@dikac/t-message/message";
 import Validatable from "@dikac/t-validatable/validatable";
-import Guard from "@dikac/t-function/boolean/guard";
 import Return from "./simple";
 
 /**
@@ -12,34 +10,34 @@ import Return from "./simple";
  * {@param message} is used to generate message
  */
 export default function Callback<
-    ValueT = unknown,
-    TypeT extends ValueT = ValueT,
-    MessageT = unknown,
+    ValueType = unknown,
+    Type extends ValueType = ValueType,
+    MessageType = unknown,
 >(
-    value : ValueT,
-    validation : Guard<ValueT, TypeT>,
-    message : Function<[Readonly<Value<ValueT> & Validatable<boolean>>], MessageT>,
-) : Return<ValueT, ValueT, TypeT, Readonly<Value<ValueT> & Validatable & Message<MessageT>>>
+    value : ValueType,
+    validation : (value:ValueType)=>value is Type,
+    message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType,
+) : Return<ValueType, ValueType, Type, Readonly<Value<ValueType> & Validatable & Message<MessageType>>>
 
 export default function Callback<
-    ValueT = unknown,
-    TypeT extends ValueT = ValueT,
-    MessageT = unknown,
+    ValueType = unknown,
+    Type extends ValueType = ValueType,
+    MessageType = unknown,
 >(
-    value : TypeT,
-    validation : Function<[ValueT], boolean>,
-    message : Function<[Readonly<Value<ValueT> & Validatable<boolean>>], MessageT>,
-) : Return<ValueT, ValueT, TypeT, Readonly<Value<ValueT> & Validatable & Message<MessageT>>>
+    value : Type,
+    validation : (value:ValueType)=>boolean,
+    message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType,
+) : Return<ValueType, ValueType, Type, Readonly<Value<ValueType> & Validatable & Message<MessageType>>>
 
 export default function Callback<
-    ValueT = unknown,
-    TypeT extends ValueT = ValueT,
-    MessageT = unknown,
+    ValueType = unknown,
+    Type extends ValueType = ValueType,
+    MessageType = unknown,
 >(
-    value : ValueT,
-    validation : Function<[ValueT], boolean>,
-    message : Function<[Readonly<Value<ValueT> & Validatable<boolean>>], MessageT>,
-) :  Readonly<Value<ValueT> & Validatable<boolean> & Message<MessageT>>
+    value : ValueType,
+    validation : (value:ValueType)=>boolean,
+    message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType,
+) :  Readonly<Value<ValueType> & Validatable<boolean> & Message<MessageType>>
 {
 
     return  {

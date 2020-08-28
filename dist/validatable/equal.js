@@ -27,7 +27,7 @@
                 return base.valid;
             },
             get message() {
-                return memoize_getter_1.default(this, 'message', () => message(base));
+                return memoize_getter_1.default(this, 'message', message(base));
             }
         };
     }

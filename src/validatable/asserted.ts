@@ -1,7 +1,6 @@
 import Value from "@dikac/t-value/value";
 import ValueInfer from "@dikac/t-value/value/infer";
 import ReadonlyWrapper from "./readonly-wrapper";
-import Function from "@dikac/t-function/function";
 import ThrowableValid from "./throwable/valid";
 import Validatable from "./validatable";
 
@@ -22,7 +21,7 @@ export default class Asserted<
      */
     constructor(
         subject : ValidatableT,
-        public error : Function<[ValidatableT], Error> = ThrowableValid
+        public error : (result:ValidatableT)=>Error = ThrowableValid
     ) {
 
         super(subject);

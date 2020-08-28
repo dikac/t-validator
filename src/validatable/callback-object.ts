@@ -1,6 +1,4 @@
 import Value from "@dikac/t-value/value";
-import Function from "@dikac/t-function/function";
-import FunctionGuard from "@dikac/t-function/boolean/guard";
 import Message from "@dikac/t-message/message";
 import Callback from "./callback";
 import Validatable from "@dikac/t-validatable/validatable";
@@ -20,21 +18,21 @@ export default function CallbackObject<
     Type extends Val = Val,
     MessageT = unknown,
     >(
-    object : Value<Val> & Validation<FunctionGuard<unknown, Type>> & Message<Function<[Value<Val> & Validatable], MessageT>>,
+    object : Value<Val> & Validation<(value:unknown)=>value is Type> & Message<(result:Value<Val> & Validatable)=>MessageT>,
 )  : Return<Val, Val, Type, Readonly<Value<Val> & Validatable & Message<MessageT>>>;
 
 export default function CallbackObject<
     Val = unknown,
     MessageT = unknown,
     >(
-    object : Value<Val> & Validation<Function<unknown[], boolean>> & Message<Function<[Value<Val> & Validatable], MessageT>>,
+    object : Value<Val> & Validation<(value:unknown)=>boolean> & Message<(result:Value<Val> & Validatable)=>MessageT>,
 )  : Readonly<Value<Val> & Validatable & Message<MessageT>> ;
 
 export default function CallbackObject<
     Val = unknown,
     MessageT = unknown,
 >(
-    object : Value<Val> & Validation<Function<unknown[], boolean>> & Message<Function<[Value<Val> & Validatable], MessageT>>,
+    object : Value<Val> & Validation<(value:unknown)=>boolean> & Message<(result:Value<Val> & Validatable)=>MessageT>,
 )  : Readonly<Value<Val> & Validatable & Message<MessageT>> {
 
     return <Readonly<Value<Val> & Validatable & Message<MessageT>>> Callback(object.value, object.validation, object.message);
