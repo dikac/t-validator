@@ -3,7 +3,6 @@ import Message from "@dikac/t-message/message";
 import BooleanEqual from "@dikac/t-boolean/equal";
 import Validatable from "@dikac/t-validatable/validatable";
 import Return from "./simple";
-import MemoizeGetter from "@dikac/t-object/value/value/memoize-getter";
 import Callback from "./callback";
 import ReadonlyMerge from "./readonly-merge";
 

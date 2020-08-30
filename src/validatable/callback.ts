@@ -1,6 +1,5 @@
 import Value from "@dikac/t-value/value";
 import Validatable from "@dikac/t-validatable/validatable";
-import Return from "./simple";
 import Message from "@dikac/t-message/message";
 import Validation from "../boolean/validation/validation";
 import MemoizeGetter from "@dikac/t-object/value/value/memoize-getter";
