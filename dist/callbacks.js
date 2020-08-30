@@ -4,19 +4,19 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./validatable/callback"], factory);
+        define(["require", "exports", "./validatable/callback-function"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const callback_1 = require("./validatable/callback");
+    const callback_function_1 = require("./validatable/callback-function");
     class Callbacks {
-        constructor(message, validation) {
-            this.message = message;
+        constructor(validation, message) {
             this.validation = validation;
+            this.message = message;
         }
         validate(value) {
-            return callback_1.default(value, this.validation, this.message);
+            return callback_function_1.default(value, this.validation, this.message);
         }
     }
     exports.default = Callbacks;

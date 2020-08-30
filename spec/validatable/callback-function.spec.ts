@@ -1,4 +1,4 @@
-import Callback from "../../dist/validatable/callback";
+import CallbackFunction from "../../dist/validatable/callback-function";
 import Value from "@dikac/t-value/value";
 import Validatable from "@dikac/t-validatable/validatable";
 
@@ -13,7 +13,7 @@ describe('compiler compatibility', function () {
 
     describe('guard', function () {
 
-        let wrapper = Callback({}, (v:unknown) : v is string => true, TestMessage);
+        let wrapper = CallbackFunction({}, (v:unknown) : v is string => true, TestMessage);
 
         if(wrapper.valid) {
 
@@ -35,7 +35,7 @@ describe('compiler compatibility', function () {
     describe('validate', function () {
 
         let v = 12;
-        let wrapper = Callback(v, (v: unknown) : boolean => true, TestMessage);
+        let wrapper = CallbackFunction(v, (v: unknown) : boolean => true, TestMessage);
 
         if(wrapper.valid) {
 
@@ -60,7 +60,7 @@ describe('construct', function () {
 
     it("data", () => {
 
-        let wrapper = Callback({}, (v)=>typeof v === "object", TestMessage);
+        let wrapper = CallbackFunction({}, (v)=>typeof v === "object", TestMessage);
 
         expect(wrapper.valid).toBeTrue()
         expect(wrapper.value).toEqual({})
@@ -74,7 +74,7 @@ describe('set', function () {
 
     it("data", () => {
 
-        let wrapper = Callback('str', (v)=>typeof v === "object", TestMessage);
+        let wrapper = CallbackFunction('str', (v)=>typeof v === "object", TestMessage);
 
         expect(wrapper.valid).toBeFalse()
         expect(wrapper.value).toBe('str')

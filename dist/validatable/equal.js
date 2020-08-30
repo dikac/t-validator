@@ -4,32 +4,17 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-object/value/value/memoize-getter"], factory);
+        define(["require", "exports", "@dikac/t-boolean/equal", "./callback", "./readonly-merge"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const memoize_getter_1 = require("@dikac/t-object/value/value/memoize-getter");
+    const equal_1 = require("@dikac/t-boolean/equal");
+    const callback_1 = require("./callback");
+    const readonly_merge_1 = require("./readonly-merge");
     function Equal(value, type, message) {
-        const base = {
-            get value() {
-                return [value, type];
-            },
-            get valid() {
-                return value === type;
-            },
-        };
-        return {
-            get value() {
-                return value;
-            },
-            get valid() {
-                return base.valid;
-            },
-            get message() {
-                return memoize_getter_1.default(this, 'message', message(base));
-            }
-        };
+        const bs = new callback_1.default([type, value], (values) => equal_1.default(...values), message);
+        return new readonly_merge_1.default({ value: value }, bs, bs);
     }
     exports.default = Equal;
 });

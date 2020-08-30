@@ -1,6 +1,6 @@
 import IsObject from "@dikac/t-object/boolean/object";
 import Asserted from "../../dist/validatable/asserted";
-import Callback from "../../dist/validatable/callback";
+import CallbackFunction from "../../dist/validatable/callback-function";
 import Validatable from "@dikac/t-validatable/validatable";
 import Value from "@dikac/t-value/value";
 
@@ -13,7 +13,7 @@ function TestMessage (value : Validatable & Value) {
 describe('invalid', function () {
 
 
-    let subject = Callback(1, IsObject, TestMessage);
+    let subject = CallbackFunction(1, IsObject, TestMessage);
     let callback = new Asserted(subject);
 
     it("check value", () => {
@@ -36,7 +36,7 @@ describe('invalid', function () {
 
 describe('valid', function () {
 
-    let subject = Callback({}, IsObject, TestMessage);
+    let subject = CallbackFunction({}, IsObject, TestMessage);
     let callback = new Asserted(subject);
 
     it("check value", () => {

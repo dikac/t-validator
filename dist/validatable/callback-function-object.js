@@ -10,9 +10,9 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const callback_1 = require("./callback");
-    function CallbackObject(object) {
-        return callback_1.default(object.value, object.validation, object.message);
+    function CallbackFunctionObject(object) {
+        return new callback_1.default(object.value, object.validation, object.message);
     }
-    exports.default = CallbackObject;
+    exports.default = CallbackFunctionObject;
 });
-//# sourceMappingURL=callback-object.js.map
+//# sourceMappingURL=callback-function-object.js.map
