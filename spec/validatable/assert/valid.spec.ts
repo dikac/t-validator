@@ -17,9 +17,10 @@ describe('compiler compatible', ()=>{
     // @ts-expect-error
     let invalid : number = argument.value;
 
+    // @ts-expect-error
     Valid<Validatable & Value<number> & Message>(argument, (val1)=>new Error('error'));
 
-    let valid : number = argument.value;
+    let value : number = argument.value;
 })
 
 it("valid", function() {

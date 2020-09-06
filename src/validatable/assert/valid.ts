@@ -7,12 +7,11 @@ import ThrowableValid from "../throwable/valid";
  */
 
 export default function Valid<
-    Assumption extends Argument,
     Argument extends Validatable = Validatable,
 >(
     value : Argument,
     error : (value:Argument)=>Error = ThrowableValid
-) : asserts value is Assumption {
+) : asserts value is Argument {
 
     if(!value.valid) {
 
