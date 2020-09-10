@@ -9,12 +9,18 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * adapt callback to {@see Validator}
+     */
     class Callback {
-        constructor(functions) {
-            this.functions = functions;
+        /**
+         * @param callback
+         */
+        constructor(callback) {
+            this.callback = callback;
         }
         validate(value) {
-            return this.functions(value);
+            return this.callback(value);
         }
     }
     exports.default = Callback;

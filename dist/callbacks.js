@@ -10,7 +10,17 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const callback_function_1 = require("./validatable/callback-function");
+    /**
+     * create {@see Validator} from multiple callback
+     */
     class Callbacks {
+        /**
+         * @param validation
+         * handle {@see Validatable.valid} call
+         *
+         * @param message
+         * handle {@see Validatable.message} call
+         */
         constructor(validation, message) {
             this.validation = validation;
             this.message = message;
