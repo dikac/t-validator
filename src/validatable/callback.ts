@@ -15,11 +15,14 @@ export default class Callback<
     Readonly<Validation<(value:ValueType)=>boolean>>
 {
 
+    #message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType;
+
     constructor(
         readonly value : Type,
         readonly validation : (value:ValueType)=>boolean,
-        private _message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType,
+        message : (result:Readonly<Value<ValueType> & Validatable<boolean>>)=> MessageType,
     ) {
+        this.#message = message;
     }
 
     get valid() {
@@ -29,6 +32,6 @@ export default class Callback<
 
     get message() {
 
-        return MemoizeGetter(this, 'message', this._message(this));
+        return MemoizeGetter(this, 'message', this.#message(this));
     }
 }
