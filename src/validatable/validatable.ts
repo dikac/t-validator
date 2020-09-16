@@ -4,9 +4,9 @@ import ValidatableInterface from "@dikac/t-validatable/validatable";
 
 type Validatable<
     Base = unknown,
-    MessageT = unknown,
+    MessageType = unknown,
     Boolean extends boolean = boolean
-> = Message<MessageT> &
+> = Message<MessageType> &
     Value<Base> &
     ValidatableInterface<Boolean>;
 

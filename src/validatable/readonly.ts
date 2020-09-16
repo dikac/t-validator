@@ -1,11 +1,11 @@
 export default function Readonly<
-    ValueT,
-    MessageT,
-    ValidT extends boolean
+    ValueType,
+    MessageType,
+    ValidType extends boolean
 >(
-    value : ValueT,
-    valid : ValidT,
-    message : MessageT
+    value : ValueType,
+    valid : ValidType,
+    message : MessageType
 ) {
 
     return {

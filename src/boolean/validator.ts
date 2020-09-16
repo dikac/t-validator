@@ -2,10 +2,10 @@ import Simple from "../simple";
 import TypeFunction from "@dikac/t-function/boolean/function";
 
 export default function Validator<
-    ValidatorT extends Simple
+    ValidatorType extends Simple
 >(
     value : object
-) : value is ValidatorT {
+) : value is ValidatorType {
 
     if(!TypeFunction((<Simple>value).validate)) {
 

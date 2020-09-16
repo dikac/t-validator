@@ -7,12 +7,12 @@ import Validatable from "./validatable";
  * throw exception when {@link Validatable} is in valid (false) when
  * accessing value {@link Value}
  */
-export default class Asserted<ValidatableT extends Validatable = Validatable> extends ReadonlyWrapper<ValidatableT> {
-    error: (result: ValidatableT) => Error;
+export default class Asserted<ValidatableType extends Validatable = Validatable> extends ReadonlyWrapper<ValidatableType> {
+    error: (result: ValidatableType) => Error;
     /**
      * @param subject
      * @param error
      */
-    constructor(subject: ValidatableT, error?: (result: ValidatableT) => Error);
-    get value(): ValueInfer<ValidatableT>;
+    constructor(subject: ValidatableType, error?: (result: ValidatableType) => Error);
+    get value(): ValueInfer<ValidatableType>;
 }

@@ -8,12 +8,12 @@ import Validatable from "./validatable";
 /**
  * merge {@link Value}, {@link Message} and {@link ValidatableInterface}
  */
-export default class ReadonlyMerge<ValueT extends Value, MessageT extends Message, ValidatableT extends ValidatableInterface> implements Readonly<Validatable<InferValue<ValueT>, InferMessage<MessageT>, InferValidatable<ValidatableT>>> {
-    readonly valueContainer: ValueT;
-    readonly messageContainer: MessageT;
-    readonly validatableContainer: ValidatableT;
-    constructor(valueContainer: ValueT, messageContainer: MessageT, validatableContainer: ValidatableT);
-    get valid(): InferValidatable<ValidatableT>;
-    get value(): InferValue<ValueT>;
-    get message(): InferMessage<MessageT>;
+export default class ReadonlyMerge<ValueType extends Value, MessageType extends Message, ValidatableType extends ValidatableInterface> implements Readonly<Validatable<InferValue<ValueType>, InferMessage<MessageType>, InferValidatable<ValidatableType>>> {
+    readonly valueContainer: ValueType;
+    readonly messageContainer: MessageType;
+    readonly validatableContainer: ValidatableType;
+    constructor(valueContainer: ValueType, messageContainer: MessageType, validatableContainer: ValidatableType);
+    get valid(): InferValidatable<ValidatableType>;
+    get value(): InferValue<ValueType>;
+    get message(): InferMessage<MessageType>;
 }

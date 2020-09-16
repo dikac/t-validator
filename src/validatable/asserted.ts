@@ -11,29 +11,29 @@ import Validatable from "./validatable";
  * accessing value {@link Value}
  */
 export default class Asserted<
-    ValidatableT extends Validatable = Validatable
+    ValidatableType extends Validatable = Validatable
 > extends ReadonlyWrapper<
-    ValidatableT
+    ValidatableType
 > {
     /**
      * @param subject
      * @param error
      */
     constructor(
-        subject : ValidatableT,
-        public error : (result:ValidatableT)=>Error = ThrowableValid
+        subject : ValidatableType,
+        public error : (result:ValidatableType)=>Error = ThrowableValid
     ) {
 
         super(subject);
     }
 
-    get value() : ValueInfer<ValidatableT> {
+    get value() : ValueInfer<ValidatableType> {
 
         if(!this.valid) {
 
             throw this.error(this.subject);
         }
 
-        return <ValueInfer<ValidatableT>> this.subject.value;
+        return <ValueInfer<ValidatableType>> this.subject.value;
     }
 }

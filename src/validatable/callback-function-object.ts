@@ -15,26 +15,26 @@ import Callback from "./callback";
  */
 
 export default function CallbackFunctionObject<
-    Val = unknown,
-    Type extends Val = Val,
-    MessageT = unknown,
+    ValueType = unknown,
+    Type extends ValueType = ValueType,
+    MessageType = unknown,
     >(
-    object : Value<Val> & Validation<(value:unknown)=>value is Type> & Message<(result:Value<Val> & Validatable)=>MessageT>,
-)  : Return<Val, Val, Type, Readonly<Value<Val> & Validatable & Message<MessageT>>>;
+    object : Value<ValueType> & Validation<(value:unknown)=>value is Type> & Message<(result:Value<ValueType> & Validatable)=>MessageType>,
+)  : Return<ValueType, ValueType, Type, Readonly<Value<ValueType> & Validatable & Message<MessageType>>>;
 
 export default function CallbackFunctionObject<
-    Val = unknown,
-    MessageT = unknown,
+    ValueType = unknown,
+    MessageType = unknown,
     >(
-    object : Value<Val> & Validation<(value:unknown)=>boolean> & Message<(result:Value<Val> & Validatable)=>MessageT>,
-)  : Readonly<Value<Val> & Validatable & Message<MessageT>> ;
+    object : Value<ValueType> & Validation<(value:unknown)=>boolean> & Message<(result:Value<ValueType> & Validatable)=>MessageType>,
+)  : Readonly<Value<ValueType> & Validatable & Message<MessageType>> ;
 
 export default function CallbackFunctionObject<
-    Val = unknown,
-    MessageT = unknown,
+    ValueType = unknown,
+    MessageType = unknown,
 >(
-    object : Value<Val> & Validation<(value:unknown)=>boolean> & Message<(result:Value<Val> & Validatable)=>MessageT>,
-)  : Readonly<Value<Val> & Validatable & Message<MessageT>> {
+    object : Value<ValueType> & Validation<(value:unknown)=>boolean> & Message<(result:Value<ValueType> & Validatable)=>MessageType>,
+)  : Readonly<Value<ValueType> & Validatable & Message<MessageType>> {
 
     return new Callback(object.value, object.validation, object.message);
 }

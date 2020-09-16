@@ -10,5 +10,5 @@ import Validation from "../boolean/validation/validation";
  * {@link Value} is used as value
  * {@link Message} is used as message
  */
-export default function CallbackFunctionObject<Val = unknown, Type extends Val = Val, MessageT = unknown>(object: Value<Val> & Validation<(value: unknown) => value is Type> & Message<(result: Value<Val> & Validatable) => MessageT>): Return<Val, Val, Type, Readonly<Value<Val> & Validatable & Message<MessageT>>>;
-export default function CallbackFunctionObject<Val = unknown, MessageT = unknown>(object: Value<Val> & Validation<(value: unknown) => boolean> & Message<(result: Value<Val> & Validatable) => MessageT>): Readonly<Value<Val> & Validatable & Message<MessageT>>;
+export default function CallbackFunctionObject<ValueType = unknown, Type extends ValueType = ValueType, MessageType = unknown>(object: Value<ValueType> & Validation<(value: unknown) => value is Type> & Message<(result: Value<ValueType> & Validatable) => MessageType>): Return<ValueType, ValueType, Type, Readonly<Value<ValueType> & Validatable & Message<MessageType>>>;
+export default function CallbackFunctionObject<ValueType = unknown, MessageType = unknown>(object: Value<ValueType> & Validation<(value: unknown) => boolean> & Message<(result: Value<ValueType> & Validatable) => MessageType>): Readonly<Value<ValueType> & Validatable & Message<MessageType>>;

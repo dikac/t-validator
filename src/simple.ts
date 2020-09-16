@@ -8,7 +8,7 @@ import Validator from "./validator";
 type Simple<
     Base = unknown,
     Type extends Base = Base,
-    ValidatableT extends Validatable<Base> = Validatable<Base>
-> = Validator<Base, Type, false, true, ValidatableT>;
+    ValidatableType extends Validatable<Base> = Validatable<Base>
+> = Validator<Base, Type, false, true, ValidatableType>;
 
 export default Simple;

@@ -10,9 +10,9 @@ import Simple from "./validatable/simple";
 /**
  * wrapper for {@link Simple}
  */
-export default class Wrapper<ValidatorT extends Validator> implements Validator<BaseInfer<ValidatorT>, TypeInfer<ValidatorT>, AmbiguousInfer<ValidatorT>, MatchInfer<ValidatorT>>, ValidatorContainer<ValidatorT> {
-    validator: ValidatorT;
-    constructor(validator: ValidatorT);
-    validate<Argument extends BaseInfer<ValidatorT>>(value: Argument): Simple<BaseInfer<ValidatorT>, Argument, TypeInfer<ValidatorT>, ValidatableInfer<ValidatorT>>;
-    validate<Argument extends TypeInfer<ValidatorT>>(value: Argument): Replace<Argument, MatchInfer<ValidatorT>, ValidatableInfer<ValidatorT>>;
+export default class Wrapper<ValidatorType extends Validator> implements Validator<BaseInfer<ValidatorType>, TypeInfer<ValidatorType>, AmbiguousInfer<ValidatorType>, MatchInfer<ValidatorType>>, ValidatorContainer<ValidatorType> {
+    validator: ValidatorType;
+    constructor(validator: ValidatorType);
+    validate<Argument extends BaseInfer<ValidatorType>>(value: Argument): Simple<BaseInfer<ValidatorType>, Argument, TypeInfer<ValidatorType>, ValidatableInfer<ValidatorType>>;
+    validate<Argument extends TypeInfer<ValidatorType>>(value: Argument): Replace<Argument, MatchInfer<ValidatorType>, ValidatableInfer<ValidatorType>>;
 }

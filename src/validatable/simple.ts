@@ -5,14 +5,14 @@ type Simple<
     Base = unknown,
     Argument extends Base = Base,
     Type extends Base = Base,
-    ValidatableT extends Validatable<Base> = Validatable<Base>
+    ValidatableType extends Validatable<Base> = Validatable<Base>
 > = Ambiguous<
     Base,
     Argument,
     Type,
     false,
     true,
-    ValidatableT
+    ValidatableType
 >;
 
 export default Simple;

@@ -1,7 +1,7 @@
 import Validator from "../validator";
 import AmbiguousInterface from "./ambiguous";
 
-type Infer<ValidatorT> = ValidatorT extends Validator<
+type Infer<ValidatorType> = ValidatorType extends Validator<
     infer Base,
     infer Type,
     infer Ambiguous,

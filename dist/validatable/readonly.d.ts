@@ -1,5 +1,5 @@
-export default function Readonly<ValueT, MessageT, ValidT extends boolean>(value: ValueT, valid: ValidT, message: MessageT): {
-    readonly value: ValueT;
-    readonly valid: ValidT;
-    readonly message: MessageT;
+export default function Readonly<ValueType, MessageType, ValidType extends boolean>(value: ValueType, valid: ValidType, message: MessageType): {
+    readonly value: ValueType;
+    readonly valid: ValidType;
+    readonly message: MessageType;
 };

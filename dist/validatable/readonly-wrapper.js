@@ -4,16 +4,21 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-validatable/readonly-wrapper"], factory);
+        define(["require", "exports"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const readonly_wrapper_1 = require("@dikac/t-validatable/readonly-wrapper");
     /**
      * read only wrapper for {@link Message}, {@link Value} and {@link ValidatableInterface}
      */
-    class ReadonlyWrapper extends readonly_wrapper_1.default {
+    class ReadonlyWrapper {
+        constructor(subject) {
+            this.subject = subject;
+        }
+        get valid() {
+            return this.subject.valid;
+        }
         get message() {
             return this.subject.message;
         }

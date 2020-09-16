@@ -3,5 +3,5 @@ import Validator from "./validator";
 /**
  * simple implementation of {@see Validator}
  */
-declare type Simple<Base = unknown, Type extends Base = Base, ValidatableT extends Validatable<Base> = Validatable<Base>> = Validator<Base, Type, false, true, ValidatableT>;
+declare type Simple<Base = unknown, Type extends Base = Base, ValidatableType extends Validatable<Base> = Validatable<Base>> = Validator<Base, Type, false, true, ValidatableType>;
 export default Simple;

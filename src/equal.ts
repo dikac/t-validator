@@ -13,19 +13,19 @@ import ValidatableInterface from "@dikac/t-validatable/validatable";
 export default class Equal<
     Base = unknown,
     Type extends Base = Base,
-    MessageT = unknown,
-> implements Simple<Base, Type, Validatable<Base, MessageT>> {
+    MessageType = unknown,
+> implements Simple<Base, Type, Validatable<Base, MessageType>> {
 
     constructor(
         public value : Type,
-        public message : <Argument extends Base>(argument: Value<[Base, Type]> & ValidatableInterface) => MessageT
+        public message : <Argument extends Base>(argument: Value<[Base, Type]> & ValidatableInterface) => MessageType
     ) {
 
     }
 
-    validate<Argument extends Type>(value : Argument) : Replace<Argument, true, Validatable<Base, MessageT>>;
-    validate<Argument extends Base>(value : Argument) : AmbiguousInterface<Base, Argument, Type, false, true, Validatable<Base, MessageT>>;
-    validate<Argument extends Base>(value : Argument) : AmbiguousInterface<Base, Argument, Type, false, true, Validatable<Base, MessageT>> {
+    validate<Argument extends Type>(value : Argument) : Replace<Argument, true, Validatable<Base, MessageType>>;
+    validate<Argument extends Base>(value : Argument) : AmbiguousInterface<Base, Argument, Type, false, true, Validatable<Base, MessageType>>;
+    validate<Argument extends Base>(value : Argument) : AmbiguousInterface<Base, Argument, Type, false, true, Validatable<Base, MessageType>> {
 
         return ValidatableEqual(value, this.value, this.message);
     }

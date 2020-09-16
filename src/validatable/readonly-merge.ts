@@ -10,36 +10,36 @@ import Validatable from "./validatable";
  * merge {@link Value}, {@link Message} and {@link ValidatableInterface}
  */
 export default class ReadonlyMerge<
-    ValueT extends Value,
-    MessageT extends Message,
-    ValidatableT extends ValidatableInterface,
+    ValueType extends Value,
+    MessageType extends Message,
+    ValidatableType extends ValidatableInterface,
 >
 implements
     Readonly<Validatable<
-        InferValue<ValueT>,
-        InferMessage<MessageT>,
-        InferValidatable<ValidatableT>
+        InferValue<ValueType>,
+        InferMessage<MessageType>,
+        InferValidatable<ValidatableType>
     >>
 {
     constructor(
-         readonly valueContainer: ValueT,
-         readonly messageContainer: MessageT,
-         readonly validatableContainer: ValidatableT,
+         readonly valueContainer: ValueType,
+         readonly messageContainer: MessageType,
+         readonly validatableContainer: ValidatableType,
     ) {
     }
 
-    get valid() : InferValidatable<ValidatableT> {
+    get valid() : InferValidatable<ValidatableType> {
 
-        return <InferValidatable<ValidatableT>>this.validatableContainer.valid;
+        return <InferValidatable<ValidatableType>>this.validatableContainer.valid;
     }
 
-    get value() : InferValue<ValueT> {
+    get value() : InferValue<ValueType> {
 
-        return <InferValue<ValueT>> this.valueContainer.value;
+        return <InferValue<ValueType>> this.valueContainer.value;
     }
 
-    get message(): InferMessage<MessageT> {
+    get message(): InferMessage<MessageType> {
 
-        return <InferMessage<MessageT>> this.messageContainer.message;
+        return <InferMessage<MessageType>> this.messageContainer.message;
     }
 }

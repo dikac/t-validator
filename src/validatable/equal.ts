@@ -8,16 +8,16 @@ import ReadonlyMerge from "./readonly-merge";
 
 export default function Equal<
     BaseTemplate = unknown,
-    ValueT extends BaseTemplate = BaseTemplate,
-    TypeT extends BaseTemplate = BaseTemplate,
-    MessageT = unknown,
+    ValueType extends BaseTemplate = BaseTemplate,
+    TypeType extends BaseTemplate = BaseTemplate,
+    MessageType = unknown,
 >(
-    value : ValueT,
-    type : TypeT,
-    message : (result:Readonly<Value<[ValueT, TypeT]> & Validatable<boolean>>)=>MessageT,
-) : Return<BaseTemplate, ValueT, TypeT, Readonly<Value<ValueT> & Validatable & Message<MessageT>>> {
+    value : ValueType,
+    type : TypeType,
+    message : (result:Readonly<Value<[ValueType, TypeType]> & Validatable<boolean>>)=>MessageType,
+) : Return<BaseTemplate, ValueType, TypeType, Readonly<Value<ValueType> & Validatable & Message<MessageType>>> {
 
     const bs = new Callback([type, value], (values: [BaseTemplate, BaseTemplate])=>BooleanEqual(...values), message);
 
-    return new ReadonlyMerge({value:value}, bs, bs) as Return<BaseTemplate, ValueT, TypeT, Readonly<Value<ValueT> & Validatable & Message<MessageT>>>;
+    return new ReadonlyMerge({value:value}, bs, bs) as Return<BaseTemplate, ValueType, TypeType, Readonly<Value<ValueType> & Validatable & Message<MessageType>>>;
 }

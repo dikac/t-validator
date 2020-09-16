@@ -11,14 +11,14 @@ export default class Filter<
     Base = unknown,
     Type extends Base = Base,
     Extent extends Validatable<Base> = Validatable<Base>,
-    ValidatorT extends Simple = Simple,
+    ValidatorType extends Simple = Simple,
 > implements
     Validator<Base, Type, false, true, Extent>,
-    ValidatorContainer<ValidatorT>
+    ValidatorContainer<ValidatorType>
 {
     constructor(
-        public validator : ValidatorT,
-        public filter : <Argument extends Base>(result:Infer<ValidatorT>, argument:Base) => Ambiguous<Base, Argument, Type, boolean, boolean, Extent>
+        public validator : ValidatorType,
+        public filter : <Argument extends Base>(result:Infer<ValidatorType>, argument:Base) => Ambiguous<Base, Argument, Type, boolean, boolean, Extent>
     ){
     }
 
@@ -26,7 +26,7 @@ export default class Filter<
     validate<Argument extends Base>(value : Argument) : Ambiguous<Base, Argument, Type, false, true, Extent>;
 
     validate<Argument extends Base>(value : Argument) {
-        let validatable : Infer<ValidatorT> = <Infer<ValidatorT>> this.validator.validate(value);
+        let validatable : Infer<ValidatorType> = <Infer<ValidatorType>> this.validator.validate(value);
 
         return <ReturnSimple<Base, Argument, Type, Extent>> this.filter(validatable, value);
     }
