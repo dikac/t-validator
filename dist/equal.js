@@ -1,28 +1,15 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+import ValidatableEqual from "./validatable/equal";
+/**
+ * {@template Base} type which can be handled by implmentation
+ * {@template Type} valid value type
+ */
+export default class Equal {
+    constructor(value, message) {
+        this.value = value;
+        this.message = message;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./validatable/equal"], factory);
+    validate(value) {
+        return ValidatableEqual(value, this.value, this.message);
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const equal_1 = require("./validatable/equal");
-    /**
-     * {@template Base} type which can be handled by implmentation
-     * {@template Type} valid value type
-     */
-    class Equal {
-        constructor(value, message) {
-            this.value = value;
-            this.message = message;
-        }
-        validate(value) {
-            return equal_1.default(value, this.value, this.message);
-        }
-    }
-    exports.default = Equal;
-});
+}
 //# sourceMappingURL=equal.js.map

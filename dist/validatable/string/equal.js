@@ -1,22 +1,9 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+export default function Equal(object) {
+    if (object.valid) {
+        return `value is equal`;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+    else {
+        return `value is not equal`;
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function Equal(object) {
-        if (object.valid) {
-            return `value is equal`;
-        }
-        else {
-            return `value is not equal`;
-        }
-    }
-    exports.default = Equal;
-});
+}
 //# sourceMappingURL=equal.js.map

@@ -1,31 +1,18 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+/**
+ * read only wrapper for {@link Message}, {@link Value} and {@link ValidatableInterface}
+ */
+export default class ReadonlyWrapper {
+    constructor(subject) {
+        this.subject = subject;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+    get valid() {
+        return this.subject.valid;
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * read only wrapper for {@link Message}, {@link Value} and {@link ValidatableInterface}
-     */
-    class ReadonlyWrapper {
-        constructor(subject) {
-            this.subject = subject;
-        }
-        get valid() {
-            return this.subject.valid;
-        }
-        get message() {
-            return this.subject.message;
-        }
-        get value() {
-            return this.subject.value;
-        }
+    get message() {
+        return this.subject.message;
     }
-    exports.default = ReadonlyWrapper;
-});
+    get value() {
+        return this.subject.value;
+    }
+}
 //# sourceMappingURL=readonly-wrapper.js.map

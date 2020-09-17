@@ -11,34 +11,21 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     }
     return privateMap.get(receiver);
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+var _message;
+import MemoizeGetter from "@dikac/t-object/value/value/set-getter";
+export default class Callback {
+    constructor(value, validation, message) {
+        this.value = value;
+        this.validation = validation;
+        _message.set(this, void 0);
+        __classPrivateFieldSet(this, _message, message);
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-object/value/value/set-getter"], factory);
+    get valid() {
+        return MemoizeGetter(this, 'valid', this.validation(this.value));
     }
-})(function (require, exports) {
-    "use strict";
-    var _message;
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const set_getter_1 = require("@dikac/t-object/value/value/set-getter");
-    class Callback {
-        constructor(value, validation, message) {
-            this.value = value;
-            this.validation = validation;
-            _message.set(this, void 0);
-            __classPrivateFieldSet(this, _message, message);
-        }
-        get valid() {
-            return set_getter_1.default(this, 'valid', this.validation(this.value));
-        }
-        get message() {
-            return set_getter_1.default(this, 'message', __classPrivateFieldGet(this, _message).call(this, this));
-        }
+    get message() {
+        return MemoizeGetter(this, 'message', __classPrivateFieldGet(this, _message).call(this, this));
     }
-    exports.default = Callback;
-    _message = new WeakMap();
-});
+}
+_message = new WeakMap();
 //# sourceMappingURL=callback.js.map

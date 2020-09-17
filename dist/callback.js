@@ -1,28 +1,15 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * adapt callback to {@see Validator}
+ */
+export default class Callback {
     /**
-     * adapt callback to {@see Validator}
+     * @param callback
      */
-    class Callback {
-        /**
-         * @param callback
-         */
-        constructor(callback) {
-            this.callback = callback;
-        }
-        validate(value) {
-            return this.callback(value);
-        }
+    constructor(callback) {
+        this.callback = callback;
     }
-    exports.default = Callback;
-});
+    validate(value) {
+        return this.callback(value);
+    }
+}
 //# sourceMappingURL=callback.js.map

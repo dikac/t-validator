@@ -1,33 +1,20 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+/**
+ * merge {@link Value}, {@link Message} and {@link ValidatableInterface}
+ */
+export default class ReadonlyMerge {
+    constructor(valueContainer, messageContainer, validatableContainer) {
+        this.valueContainer = valueContainer;
+        this.messageContainer = messageContainer;
+        this.validatableContainer = validatableContainer;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+    get valid() {
+        return this.validatableContainer.valid;
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * merge {@link Value}, {@link Message} and {@link ValidatableInterface}
-     */
-    class ReadonlyMerge {
-        constructor(valueContainer, messageContainer, validatableContainer) {
-            this.valueContainer = valueContainer;
-            this.messageContainer = messageContainer;
-            this.validatableContainer = validatableContainer;
-        }
-        get valid() {
-            return this.validatableContainer.valid;
-        }
-        get value() {
-            return this.valueContainer.value;
-        }
-        get message() {
-            return this.messageContainer.message;
-        }
+    get value() {
+        return this.valueContainer.value;
     }
-    exports.default = ReadonlyMerge;
-});
+    get message() {
+        return this.messageContainer.message;
+    }
+}
 //# sourceMappingURL=readonly-merge.js.map
