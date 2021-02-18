@@ -1,16 +1,18 @@
 import Validatable from "@dikac/t-validatable/validatable";
 import Value from "@dikac/t-value/value";
+import Sentences from "@dikac/t-string/message/sentences";
+import SafeCast from "@dikac/t-string/safe-cast";
 
 export default function Equal(
     object : Validatable & Value<[unknown, unknown]>
 ) : string {
 
-    if(object.valid) {
+    const sentence = new Sentences(object.valid);
 
-        return `value is equal`;
+    sentence.subject.push(`'${SafeCast(object.value[0])}'`);
 
-    } else {
-
-        return `value is not equal`;
-    }
+    sentence.reject = ['is not'];
+    sentence.accept = ['is'];
+    sentence.expect = ['equal to', `'${SafeCast(object.value[1])}'`];
+    return sentence.message;
 }
