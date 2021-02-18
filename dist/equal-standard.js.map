@@ -1,1 +1,1 @@
-{"version":3,"file":"equal-standard.js","sourceRoot":"","sources":["../src/equal-standard.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,MAAM,SAAS,CAAC;AAC5B,OAAO,YAAY,MAAM,4BAA4B,CAAC;AAEtD,MAAM,CAAC,OAAO,UAAU,aAAa,CAKjC,KAAY;IAGZ,OAAO,IAAI,KAAK,CAAC,KAAK,EAAE,YAAY,CAAC,CAAA;AAEzC,CAAC"}
+{"version":3,"file":"equal-standard.js","sourceRoot":"","sources":["../src/equal-standard.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,MAAM,SAAS,CAAC;AAC5B,OAAO,YAAY,MAAM,4BAA4B,CAAC;AAEtD,MAAM,CAAC,OAAO,UAAU,aAAa,CAIjC,KAAY;IAGZ,OAAO,IAAI,KAAK,CAAC,KAAK,EAAE,YAAY,CAAC,CAAA;AAEzC,CAAC"}
